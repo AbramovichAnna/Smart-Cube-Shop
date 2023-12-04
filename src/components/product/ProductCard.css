@@ -1,0 +1,136 @@
+.products_wrapper {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 0.7rem;
+}
+
+@media (max-width: /* lg breakpoint */) {
+    .products_wrapper {
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 0.7rem;
+    }
+}
+
+@media (max-width: /* md breakpoint */) {
+    .products_wrapper {
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 0.6rem;
+    }
+}
+
+@media (max-width: /* xs breakpoint */) {
+    .products_wrapper {
+        grid-template-columns: 1fr;
+    }
+}
+
+.products_filter_tabs {
+    margin-top: 3rem;
+    margin-bottom: 5rem;
+}
+
+.products_card {
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 3px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+}
+
+.products_card.browse_card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+    font-size: 1.5rem;
+}
+
+.products_card.browse_card a {
+    transition: color 0.3s;
+}
+
+.products_card.browse_card a:hover {
+    color: #eee;
+}
+
+.products_img {
+    background: var(--bg-color-2);
+    text-align: center;
+    padding: 1rem;
+    overflow: hidden;
+}
+
+.products_img img {
+    width: 70%;
+    transition: transform 0.25s ease;
+}
+
+.products_img img:hover {
+    transform: scale(1.05);
+}
+
+.products_details {
+    padding: 1rem;
+}
+
+.products_title {
+    margin-top: 0.8rem;
+    margin-bottom: 0.4rem;
+}
+
+.products_info {
+    opacity: 0.8;
+    /* font-weight: 500; */
+}
+
+.products_btn {
+    width: 100%;
+    margin-top: 1.2rem;
+}
+
+.products_btn:hover {
+    font-size: 1.05rem;
+}
+
+
+.products_btn.active {
+    background-color: #009B48;
+}
+
+.products_btn[disabled] {
+    cursor: not-allowed;
+}
+
+.rating_star {
+    color: #B90000;
+    font-size: 0.9rem;
+}
+
+.separator {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border-top: 1px solid rgba(102, 102, 102, 0.6); /* #666666 with 60% opacity */
+}
+
+.prod_specs ul {
+    grid-template-columns: 0.4fr;
+}
+
+.prod_specs ul li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.prod_specs ul li span:last-child {
+    font-weight: 600;
+}
+
+/* Responsive design for larger devices (e.g., laptops, desktops) */
+/* You need to define the breakpoint for 'lg' (e.g., 992px is a common breakpoint for 'lg') */
+@media screen and (min-width: 992px) {
+    .prod_specs ul {
+        grid-template-columns: 1fr;
+    }
+}
+

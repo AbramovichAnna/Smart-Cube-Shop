@@ -1,0 +1,186 @@
+/* -------------------------------GENERAL------------------------------- */
+@import url("https://fonts.googleapis.com/css?family=Lato:300,400,700,900");
+@import url("https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700,800,900");
+
+body {
+  line-height: 1.2;
+  font-family: "Lato", sans-serif;
+  /* font-weight: 400; */
+  -webkit-font-smoothing: antialiased;
+  background-color: #161A1E;
+  overflow-x: hidden;
+  color: #E6E5E4;
+}
+
+/* body {
+  background-color: #161a1e;
+  overflow-x: hidden;
+} */
+
+/* ::-webkit-scrollbar {
+  width: 10px;
+} */
+
+p {
+  font-weight: 400;
+  color: #8a8a8a;
+  font-size: 16px;
+  line-height: 25px;
+  font-family: "Lato", sans-serif;
+  text-transform: none;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #E6E5E4;
+  font-weight: 300;
+  text-transform: uppercase;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+h1,
+.h1 {
+  font-size: 65px;
+}
+
+@media (max-width: 575px) {
+
+  h1,
+  .h1 {
+    font-size: 30px;
+  }
+}
+
+h2,
+.h2 {
+  font-size: 45px;
+}
+
+@media (max-width: 575px) {
+
+  h2,
+  .h2 {
+    font-size: 30px;
+  }
+}
+
+h3,
+.h3 {
+  font-size: 35px;
+}
+
+@media (max-width: 575px) {
+
+  h3,
+  .h3 {
+    font-size: 20px;
+  }
+}
+
+h4,
+.h4 {
+  font-size: 25px;
+}
+
+h5,
+.h5 {
+  font-size: 18px;
+}
+
+h6,
+.h6 {
+  font-size: 15px;
+}
+
+/* ---------------------------------BUTTON---------------------------------  */
+.btn {
+  font-size: 14px;
+  font-family: "Lato", sans-serif;
+  text-transform: uppercase;
+  /* padding: 20px 60px; */
+  /* font-weight: 700; */
+  border: 0;
+  /* border-radius: 0; */
+  position: relative;
+  z-index: 1;
+  transition: 0.2s ease;
+}
+
+/* input,
+button {
+  border: none;
+  outline: none;
+  line-height: 1;
+  color: inherit;
+  font-size: inherit;
+  font-family: inherit;
+  background-color: transparent;
+} */
+
+.btn:focus {
+  outline: 0;
+  box-shadow: none;
+}
+
+
+
+.btn-primary {
+  background: #fff;
+  color: #3b3b3b;
+  box-shadow: 0px 15px 38px 0px rgba(0, 0, 0, 0.12);
+}
+
+.btn-primary:hover {
+  background: #fff;
+  color: #3b3b3b;
+}
+
+.btn-secondary {
+  background: #363636;
+  color: #fff;
+  box-shadow: 0px 15px 38px 0px rgba(0, 0, 0, 0.12);
+}
+
+.btn-secondary:hover {
+  background: #363636;
+  color: #fff;
+}
+
+ol,
+ul {
+  list-style-type: none;
+  margin: 0px;
+}
+
+img {
+  vertical-align: middle;
+  border: 0;
+}
+
+a,
+a:hover,
+a:focus {
+  text-decoration: none;
+}
+
+a,
+button {
+  cursor: pointer;
+}
+
+*,
+*::before,
+*::after {
+    /* margin: 0; */
+    padding: 0;
+    box-sizing: border-box;
+}
+
+

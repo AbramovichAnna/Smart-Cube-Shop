@@ -1,0 +1,158 @@
+.login-panel {
+    position: relative;
+    display: block;
+    max-width: 410px;
+    justify-self: center;
+}
+
+.login-panel h3 {
+    -webkit-animation: fadeInUp 0.3s both 0.1s cubic-bezier(0.26, 0.63, 0.68, 1.04);
+    animation: fadeInUp 0.3s both 0.1s cubic-bezier(0.26, 0.63, 0.68, 1.04);
+    margin-bottom: 30px;
+    color: #161a1e;
+}
+
+.login-panel input[type=text],
+.login-panel input[type=password] {
+    display: block;
+    font-size: 14px;
+    line-height: 48px;
+    padding: 0 15px;
+    color: #363636;
+    width: 100%;
+    border: 1px solid #000;
+    margin: 20px 0px;
+    -webkit-animation: fadeInUp 0.3s both 0.1s cubic-bezier(0.26, 0.63, 0.68, 1.04);
+    animation: fadeInUp 0.3s both 0.1s cubic-bezier(0.26, 0.63, 0.68, 1.04);
+}
+
+.login-panel a#forget-pass {
+    float: right;
+    line-height: 1;
+    margin-top: -15px;
+    font-style: italic;
+    color: #808080;
+    font-size: 14px;
+    border-bottom: 2px solid #dbdedf;
+    -webkit-animation: fadeInUp 0.8s both 0.4s;
+    animation: fadeInUp 0.8s both 0.4s;
+}
+
+.login-panel p {
+    -webkit-animation: fadeInUp 0.8s both 0.4s;
+    animation: fadeInUp 0.8s both 0.4s;
+    margin-top: 45px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #808080;
+}
+
+@media (min-width: 300px) and (max-width: 479px) {
+    .login-panel p {
+        margin-top: 60px;
+    }
+}
+
+.login-panel p a {
+    color: #3b3b3b;
+    text-transform: uppercase;
+    border-bottom: 2px solid #dbdedf;
+}
+
+.checkbox {
+    width: 100%;
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    margin-top: 70px;
+    animation: fadeInUp 0.8s both 0.4s;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@media (min-width: 300px) and (max-width: 479px) {
+    .checkbox {
+        margin-top: 100px;
+    }
+}
+
+.checkbox .check {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 50%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border: 1px solid;
+    transform: translateY(-50%);
+}
+
+.checkbox .check input {
+    display: none;
+}
+
+.checkbox .check input:checked+.box {
+    background-color: #fff;
+}
+
+.checkbox .check input:checked+.box::after {
+    top: 0;
+}
+
+.checkbox .check .box {
+    width: 100%;
+    height: 100%;
+    transition: all 1.1s cubic-bezier(0.19, 1, 0.22, 1);
+    background-color: #fff;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.checkbox .check .box::after {
+    width: 65%;
+    height: 40%;
+    content: "";
+    position: absolute;
+    border-left: 3.5px solid;
+    border-bottom: 3.5px solid;
+    border-color: #363636;
+    transform: rotate(-45deg) translate3d(0, 0, 0);
+    transform-origin: center center;
+    transition: all 1.1s cubic-bezier(0.19, 1, 0.22, 1);
+    left: 0;
+    right: 0;
+    top: 200%;
+    bottom: 15%;
+    margin: auto;
+}
+
+.btn-submit {
+    /* position: absolute; */
+    right: 0;
+    cursor: pointer;
+    border: none;
+    background: #363636;
+    padding: 17px 80px;
+    font-size: 14px;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+@media (min-width: 300px) and (max-width: 479px) {
+    .checkbox button {
+        padding: 15px 50px;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+.checkbox span {
+    position: relative;
+    margin-left: 25px;
+    color: #808080;
+    font-size: 14px;
+}

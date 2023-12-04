@@ -1,0 +1,87 @@
+.not-found-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 100vh;
+}
+
+.not-found-text {
+    flex: 1;
+    padding: 20px;
+    text-align: center;
+}
+
+.not-found-text h1, .not-found-text h2 {
+    margin-bottom: 10px;
+}
+
+.not-found-text p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.not-found-text button {
+    background-color: #B90000;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+    margin-bottom: 10px; /* Added for space between buttons */
+}
+
+.not-found-image {
+    flex: 1;
+    text-align: center;
+}
+
+.not-found-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 50%;
+}
+
+.faded-all {
+    position: relative;
+    display: inline-block;
+    color: #161a1e;
+}
+
+.faded-all::after {
+    content: "";
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-shadow: inset 0 0 50px 50px; /* Customize the blur-radius and spread-radius here */
+}
+
+/* Responsive Design for small screens */
+@media (max-width: 768px) {
+    .not-found-container {
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .not-found-text, .not-found-image {
+        flex: none;
+        width: 100%;
+        padding: 10px;
+    }
+
+    .not-found-text h1, .not-found-text h2 {
+        font-size: 28px; /* Adjust font size for smaller screens */
+    }
+
+    .not-found-text p {
+        font-size: 16px; /* Adjust font size for smaller screens */
+    }
+
+    .not-found-text button {
+        padding: 8px 16px; /* Adjust button size for smaller screens */
+    }
+}
