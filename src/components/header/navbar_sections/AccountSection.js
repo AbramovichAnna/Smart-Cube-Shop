@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 function AccountSection() {
 
-    const HOST_URL = "http://localhost:8000";
+    const HOST_URL = "https://shop-api-763v.onrender.com/";
     const navigate = useNavigate();
 
     const [credentials, setCredentials] = useState({
@@ -28,7 +28,6 @@ function AccountSection() {
             [name]: value,
         });
     };
-
 
 
     const handleSubmit = async (e) => {
@@ -57,26 +56,26 @@ function AccountSection() {
 
     const isLoggedIn = !!localStorage.getItem('token');
 
-    // ----------------------LOGOUT----------------------
+    // --------------------------------------------------- LOGOUT
     const handleLogout = () => {
         localStorage.clear();
         setCredentials({
             username: '',
             password: '',
         });
-        axios.defaults.headers.common['Authorization'] = ''; // Clear the authorization header
+        axios.defaults.headers.common['Authorization'] = '';
     };
 
-    // ----------------------REGISTRATION----------------------
+    // --------------------------------------------------- REGISTRATION
     const [registerCredentials, setRegisterCredentials] = useState({
         username: '',
         email: '',
         password: '',
+        confirmPassword: ''
     });
 
     const [showLoginForm, setShowLoginForm] = useState(true);
 
-    // Handle registration form changes
     const handleRegisterChange = (e) => {
         const { name, value } = e.target;
         setRegisterCredentials({
@@ -85,22 +84,29 @@ function AccountSection() {
         });
     };
 
-    // Handle registration form submission
     const handleRegisterSubmit = async (e) => {
         e.preventDefault();
+    
+        const { username, email, password } = registerCredentials;
         try {
-            const response = await axios.post(`${HOST_URL}/register/`, registerCredentials);
+            const response = await axios.post(`${HOST_URL}/register/`, {
+                username,
+                email,
+                password
+            });
             console.log('Registration successful', response.data);
             alert('Registration successful');
+            toggleForms();
         } catch (error) {
             console.error('Registration failed', error.response?.data);
         }
     };
+    
 
-    // Toggle between login and registration forms
     const toggleForms = () => {
         setShowLoginForm(!showLoginForm);
     };
+
 
 
 
@@ -109,7 +115,7 @@ function AccountSection() {
             <div className="inner">
                 {isLoggedIn ? (
                     <div className="account-panel">
-                        <h4 style={{color: "#161a1e"}}>Hi {credentials.username}, glad to see you!</h4>
+                        <h4 style={{ color: "#161a1e" }}>Hi {credentials.username}, glad to see you!</h4>
                         <ul>
                             <li><Link to="/my-account">My Profile</Link></li>
                             <li><Link to="/my-account">Order History</Link></li>
@@ -121,7 +127,7 @@ function AccountSection() {
                     </div>
                 ) : showLoginForm ? (
                     <div className="login-panel">
-                        <h4 style={{color: "#161a1e", fontWeight:"500"}}>CUSTOMER LOGIN</h4>
+                        <h4 style={{ color: "#161a1e", fontWeight: "500" }}>CUSTOMER LOGIN</h4>
                         <form onSubmit={handleSubmit} method="POST">
                             <input type="text"
                                 id="username"
@@ -148,11 +154,11 @@ function AccountSection() {
                                 <button className="btn btn-submit" type="submit">Login</button>
                             </div>
                         </form>
-                        <p>Don’t have an account? <a href="#" style={{textDecoration:"underline"}} onClick={(e) => { e.preventDefault(); toggleForms(); }}>Signup</a></p>
+                        <p>Don’t have an account? <a href="#" style={{ textDecoration: "underline" }} onClick={(e) => { e.preventDefault(); toggleForms(); }}>Signup</a></p>
                     </div>
                 ) : (
                     <div className="registration-panel">
-                        <h3 style={{color: "#161a1e"}}>CUSTOMER REGISTER</h3>
+                        <h3 style={{ color: "#161a1e" }}>CUSTOMER REGISTER</h3>
                         <form onSubmit={handleRegisterSubmit} method="POST">
                             <input type="text"
                                 id="reg-username"
@@ -174,7 +180,7 @@ function AccountSection() {
                                 required placeholder="Confirm Password" />
                             <button className="btn btn-submit" type="submit">Register</button>
                         </form>
-                        <p>Already have an account? <a href='#' style={{textDecoration:"underline"}} onClick={(e) => { e.preventDefault(); toggleForms(); }}>Login</a></p>
+                        <p>Already have an account? <a href='#' style={{ textDecoration: "underline" }} onClick={(e) => { e.preventDefault(); toggleForms(); }}>Login</a></p>
                     </div>
                 )}
             </div>

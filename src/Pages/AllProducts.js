@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 
 
-function AllProducts({ addToCart, products, categories, brand }) {
+function AllProducts({ addToCart, products, categories, setCurrentCategory}) {
     console.log("AllProducts Page");
 
     return (
@@ -15,10 +15,10 @@ function AllProducts({ addToCart, products, categories, brand }) {
                     {categories.map((category) => (
                         <ul key={category.id} className="nav-item">
                             <Link to="/"
-                                // onClick={() => {
-                                //     setCurrentCategory(category.id);
-                                //     // handleSearch(searchText);
-                                // }}
+                                onClick={() => {
+                                    setCurrentCategory(category.id);
+                                    // handleSearch(searchText);
+                                }}
                             >
                                 {category.name}
                             </Link>

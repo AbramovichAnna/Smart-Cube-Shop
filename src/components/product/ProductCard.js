@@ -2,16 +2,16 @@ import React from 'react';
 import "./ProductCard.css";
 import { IoMdStar } from 'react-icons/io';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 
 
-function ProductCard({ product, brand, addToCart }) {
+function ProductCard({ product, addToCart }) {
     const HOST_URL = 'http://localhost:8000';
     const imageUrl = HOST_URL + product.image;
-    const navigate = useNavigate();
 
+
+    const navigate = useNavigate();
     const navigateToProductDetails = () => {
-        navigate(`/product/${product.id}`);
+        navigate(`/product/${product.id}`); 
     };
 
 
@@ -35,6 +35,7 @@ function ProductCard({ product, brand, addToCart }) {
             <div className="products_img">
                 <img src={imageUrl} alt="product-img" onClick={navigateToProductDetails} />
             </div>
+        
             <div className="products_details">
                 <span className="rating_star">{renderStars()}</span>
                 <h5 className="products_title" onClick={navigateToProductDetails} style={{fontWeight: "700"}}>{product.title}</h5>
@@ -51,7 +52,7 @@ function ProductCard({ product, brand, addToCart }) {
                     )}
                 </h4>
 
-                <button className="btn products_btn ">
+                <button className="btn products_btn " onClick={() => addToCart(product.id)}>
                     Add to cart
                 </button>
 

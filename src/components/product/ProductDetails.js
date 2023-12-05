@@ -8,7 +8,7 @@ import { useParams } from 'react-router-dom';
 function ProductDetails({addToCart}) {
     const [product, setProduct] = useState({});
     const { productId } = useParams();
-    const HOST_URL = 'http://localhost:8000';
+    const HOST_URL = 'https://shop-api-763v.onrender.com/';
 
     useEffect(() => {
         getProductDetails();
