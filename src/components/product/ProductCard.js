@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 function ProductCard({ product, addToCart }) {
-    const HOST_URL = 'http://localhost:8000';
+    const HOST_URL = 'https://shop-api-763v.onrender.com';
     const imageUrl = HOST_URL + product.image;
 
 

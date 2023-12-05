@@ -6,9 +6,12 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
 function ProductDetails({addToCart}) {
+
     const [product, setProduct] = useState({});
     const { productId } = useParams();
-    const HOST_URL = 'https://shop-api-763v.onrender.com/';
+
+    const HOST_URL = 'https://shop-api-763v.onrender.com';
+    // HOST_URL = "http://localhost:8000"
 
     useEffect(() => {
         getProductDetails();

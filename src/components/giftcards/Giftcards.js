@@ -5,7 +5,7 @@ import GiftCard from "./GiftCard";
 import { GoGift } from "react-icons/go";
 
 function GiftCards() {
-
+    const HOST_URL = "https://shop-api-763v.onrender.com";
     const [giftCards, setGiftCards] = useState([]);
     const [selectedCard, setSelectedCard] = useState(null);
     const [isOpen, setIsOpen] = useState(false);
@@ -30,7 +30,7 @@ function GiftCards() {
     const getGiftCards = () => {
 
         axios
-            .get("http://127.0.0.1:8000/giftcards")
+            .get(HOST_URL + "/giftcards")
             .then((response) => {
                 const shuffled = shuffleCards(response.data);
                 setGiftCards(shuffled);

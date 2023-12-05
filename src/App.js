@@ -22,7 +22,8 @@ function App() {
   const [search, setSearch] = useState("");
   const [currentCategory, setCurrentCategory] = useState(null);
 
-  const HOST_URL = "https://shop-api-763v.onrender.com/";
+  const HOST_URL = "https://shop-api-763v.onrender.com";
+  // HOST_URL = "http://localhost:8000"
 
   //---------------------------------------------------------------------------- GET PRODUCTS
   function getProducts() {

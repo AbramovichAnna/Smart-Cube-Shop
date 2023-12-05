@@ -8,8 +8,8 @@ import { useNavigate } from "react-router-dom";
 
 
 function AccountSection() {
-
-    const HOST_URL = "https://shop-api-763v.onrender.com/";
+    // HOST_URL = "http://localhost:8000"
+    const HOST_URL = "https://shop-api-763v.onrender.com";
     const navigate = useNavigate();
 
     const [credentials, setCredentials] = useState({
