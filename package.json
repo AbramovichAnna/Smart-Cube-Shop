@@ -16,7 +16,7 @@
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
-  "homepage": "https://AbramovichAnna.github.io/",
+  "homepage": "https://abramovichanna.github.io/Smart-Cube-Shop/",
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",

@@ -14,7 +14,6 @@
 }
 
 
-
 /* ---------------------------------NAVBAR LEFT SIDE--------------------------------  */
 .navbar-left {
     display: flex;
@@ -144,8 +143,15 @@
 
 
 .navbar-right-toggle.active {
-    /* border-left: 1px solid #fff; */
-    color: #3b3b3b;
+    z-index: 1001;
+    border-bottom: 1px solid rgba(102, 102, 102, 0.6);
+    background-color: #E6E5E4;
+    color: #161a1e;
+}
+
+.navbar-right-toggle.active .icon-text{
+    color: #161a1e;
+
 }
 
 .navbar-right-toggle.active>i {

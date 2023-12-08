@@ -2,21 +2,31 @@ import React from 'react';
 import ProductCard from '../components/product/ProductCard';
 import "./AllProducts.css";
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
 
 
-function AllProducts({ addToCart, products, categories, setCurrentCategory}) {
+
+function AllProducts({ products, onAddToCart,categories }) {
     console.log("AllProducts Page");
+    console.log("all products : ", products);
+    console.log("categoties : ", categories);
 
+    const [category, setCategory] = useState("");
+
+    
+
+
+    // --------------------------------------------------- RENDER ALL PRODUCTS COMPONENT----------------------------------------------
     return (
         <section id="all_products" className="product-section">
             <div className="container">
                 <div className="categories-nav">
                     {categories.map((category) => (
                         <ul key={category.id} className="nav-item">
-                            <Link to="/"
+                            <Link to="/all-products"
                                 onClick={() => {
-                                    setCurrentCategory(category.id);
+                                    setCategory(category.id);
                                     // handleSearch(searchText);
                                 }}
                             >
@@ -27,11 +37,12 @@ function AllProducts({ addToCart, products, categories, setCurrentCategory}) {
                 </div>
                 <div className="wrapper products_wrapper">
                     {products.map((product) => (
-                        <ProductCard 
+                        <ProductCard
                         key={product.id} 
                         product={product} 
-                        addToCart={addToCart}  
+                        addToCart={onAddToCart}
                         />
+                        
                     ))}
                 </div>
             </div>

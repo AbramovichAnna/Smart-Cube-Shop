@@ -1,32 +1,53 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import CartItem from './CartItem';
 import axios from 'axios';
-import CartItem from './CartItem'; // Import the CartItem component
+import { HOST_URL } from '../../common/constants';
+import './Cart.css';
 
-function Cart() {
-    const [cartItems, setCartItems] = useState([]);
+function Cart({ cartItems, setCartItems }) {
+    console.log("Cart Page");
 
-    useEffect(() => {
-        // Fetch cart items from the database
-        axios.get('http://localhost:8000/cart')
-            .then(response => setCartItems(response.data))
-            .catch(error => console.error("Error fetching data: ", error));
-    }, []);
 
-    const removeFromCart = (productId) => {
-        axios.delete(`http://localhost:8000/cart/${productId}`)
-            .then(response => {
-                // Remove the item from the cartItems state
-                setCartItems(cartItems.filter(item => item.product.id !== productId));
-            })
-            .catch(error => console.error("Error deleting item: ", error));
+
+    const updateCart = (product, quantity) => {
+        if (quantity <= 0) {
+            removeFromCart(product);
+        } else {
+            axios.put(`${HOST_URL}/cart_items/${product.id}`, { quantity })
+                .then(response => {
+                    // Update the state with the new cart items
+                    setCartItems(response.data);
+                })
+                .catch(error => console.error('Error updating cart item', error));
+        }
     };
+
+
+    const removeFromCart = (product) => {
+        axios.delete(`${HOST_URL}/cart_items/${product.id}`)
+            .then(() => {
+                // Update the state to remove the item from the cart
+                setCartItems(prevItems => prevItems.filter(item => item.product.id !== product.id));
+            })
+            .catch(error => console.error('Error removing item from cart', error));
+    };
+
 
     return (
         <div>
             <h2>Your Cart</h2>
-            {cartItems.map(item => (
-                <CartItem key={item.product.id} item={item} removeFromCart={removeFromCart} />
-            ))}
+            {cartItems.length > 0 ? (
+                cartItems.map(item => (
+                    <CartItem
+                        key={item.id}
+                        item={item}
+                        updateCart={updateCart}
+                        removeFromCart={removeFromCart}
+                    />
+                ))
+            ) : (
+                <p>Your cart is empty</p>
+            )}
         </div>
     );
 }

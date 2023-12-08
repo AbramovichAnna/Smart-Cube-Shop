@@ -5,21 +5,23 @@ import { useState } from 'react';
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
 import { useNavigate } from "react-router-dom";
+import { HOST_URL } from '../../../common/constants';
+import { registerUser } from '../../../api/authApi';
 
 
 function AccountSection() {
-    // HOST_URL = "http://localhost:8000"
-    const HOST_URL = "https://shop-api-763v.onrender.com";
-    const navigate = useNavigate();
+    const token = localStorage.getItem('token');
+    const username = localStorage.getItem('username');
+    const isLoggedIn = !!token;
+
+
+    const [showLoginForm, setShowLoginForm] = useState(true);
 
     const [credentials, setCredentials] = useState({
         username: '',
+        email: '',
         password: '',
     });
-
-    console.log(credentials);
-
-    const [token, setToken] = useState('');
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -29,10 +31,8 @@ function AccountSection() {
         });
     };
 
-
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         try {
             const response = await axios.post(HOST_URL + "/token/", credentials);
             console.log(response.data);
@@ -46,15 +46,17 @@ function AccountSection() {
             localStorage.setItem('token', token);
             let decoded = jwtDecode(token);
 
+            // Save the username to local storage
+            localStorage.setItem('username', credentials.username);
+            const userId = localStorage.getItem('userId') || sessionStorage.getItem('userId');
+
             console.log('Login successful', response.data);
             alert('Login succesful');
-            navigate('/')
+            console.log("user", credentials.username, "logged in");
         } catch (error) {
-            console.error('Login failed', error.response.data);
+            console.error('Login failed', error);
         }
     };
-
-    const isLoggedIn = !!localStorage.getItem('token');
 
     // --------------------------------------------------- LOGOUT
     const handleLogout = () => {
@@ -64,6 +66,7 @@ function AccountSection() {
             password: '',
         });
         axios.defaults.headers.common['Authorization'] = '';
+        console.log('Logout successful');
     };
 
     // --------------------------------------------------- REGISTRATION
@@ -71,10 +74,9 @@ function AccountSection() {
         username: '',
         email: '',
         password: '',
-        confirmPassword: ''
     });
 
-    const [showLoginForm, setShowLoginForm] = useState(true);
+
 
     const handleRegisterChange = (e) => {
         const { name, value } = e.target;
@@ -84,50 +86,51 @@ function AccountSection() {
         });
     };
 
-    const handleRegisterSubmit = async (e) => {
-        e.preventDefault();
-    
-        const { username, email, password } = registerCredentials;
+    const handleRegisterSubmit = async (event) => {
+        event.preventDefault();
         try {
-            const response = await axios.post(`${HOST_URL}/register/`, {
-                username,
-                email,
-                password
-            });
-            console.log('Registration successful', response.data);
-            alert('Registration successful');
-            toggleForms();
+            const userData = { ...registerCredentials };
+            const response = await registerUser(userData);
+            // Handle the response - maybe log in the user or redirect to a login page
         } catch (error) {
-            console.error('Registration failed', error.response?.data);
+            // Handle registration errors - display error messages to the user
         }
     };
-    
+
+
+
 
     const toggleForms = () => {
         setShowLoginForm(!showLoginForm);
     };
 
 
-
-
+    // --------------------------------------------------- RENDER ACCOUNT SECTION COMPONENT----------------------------------------------
     return (
         <div className="navbar-right-section" id="account">
             <div className="inner">
                 {isLoggedIn ? (
                     <div className="account-panel">
-                        <h4 style={{ color: "#161a1e" }}>Hi {credentials.username}, glad to see you!</h4>
+                        <h5 style={{ color: "#161a1e", fontWeight: "600" }}>Welcome back</h5> <h5 style={{ color: "#b90000", fontWeight: "700" }}>{username}</h5>
+
                         <ul>
-                            <li><Link to="/my-account">My Profile</Link></li>
-                            <li><Link to="/my-account">Order History</Link></li>
-                            <li><Link to="/my-account">Wishlist</Link></li>
-                            <li><Link to="/my-account">Newsletter</Link></li>
-                            <li><Link to="/my-account">My Addresses</Link></li>
-                            <button> <Link to="/" onClick={handleLogout}>Logout</Link></button>
+                            <div className="separator"></div>
+                            <li><Link to="/my-account">
+                                <p style={{ color: "#161a1e" }}>My Profile</p></Link></li>
+                            <li><Link to="/cart">
+                                <p style={{ color: "#161a1e" }}>My Cart</p></Link></li>
+                            <li><Link to="/my-account">
+                                <p style={{ color: "#161a1e" }}>My Orders</p></Link></li>
+                            <li><Link to="/my-account">
+                                <p style={{ color: "#161a1e" }}>Wishlist</p></Link></li>
+                            <div className="separator"></div>
+                            <button className="btn btn-submit" onClick={handleLogout}>Logout</button>
                         </ul>
                     </div>
                 ) : showLoginForm ? (
+                    // --------------------------------------------------- LOGIN FORM COMPONENT----------------------------------------------
                     <div className="login-panel">
-                        <h4 style={{ color: "#161a1e", fontWeight: "500" }}>CUSTOMER LOGIN</h4>
+                        <h3 style={{ color: "#161a1e" }}>CUSTOMER LOGIN</h3>
                         <form onSubmit={handleSubmit} method="POST">
                             <input type="text"
                                 id="username"
@@ -157,7 +160,8 @@ function AccountSection() {
                         <p>Don’t have an account? <a href="#" style={{ textDecoration: "underline" }} onClick={(e) => { e.preventDefault(); toggleForms(); }}>Signup</a></p>
                     </div>
                 ) : (
-                    <div className="registration-panel">
+                    // --------------------------------------------------- REGISTRATION FORM COMPONENT----------------------------------------------
+                    <div className="registration-panel login-panel">
                         <h3 style={{ color: "#161a1e" }}>CUSTOMER REGISTER</h3>
                         <form onSubmit={handleRegisterSubmit} method="POST">
                             <input type="text"
@@ -167,6 +171,13 @@ function AccountSection() {
                                 onChange={handleRegisterChange}
                                 required
                                 placeholder="Username" />
+                            <input type="email"
+                                id="reg-email"
+                                name="email"
+                                value={registerCredentials.email}
+                                onChange={handleRegisterChange}
+                                required
+                                placeholder="Email" />
                             <input type="password"
                                 id="reg-password"
                                 name="password"
@@ -174,11 +185,8 @@ function AccountSection() {
                                 onChange={handleRegisterChange}
                                 required
                                 placeholder="Password" />
-                            <input type="password"
-                                id="reg-password"
-                                name="password"
-                                required placeholder="Confirm Password" />
-                            <button className="btn btn-submit" type="submit">Register</button>
+
+                            <button className="btn btn-submit" type="submit" onClick={(e) => { e.preventDefault(); toggleForms(); }}>Register</button>
                         </form>
                         <p>Already have an account? <a href='#' style={{ textDecoration: "underline" }} onClick={(e) => { e.preventDefault(); toggleForms(); }}>Login</a></p>
                     </div>

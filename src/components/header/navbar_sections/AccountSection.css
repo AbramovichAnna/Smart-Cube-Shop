@@ -156,3 +156,74 @@
     color: #808080;
     font-size: 14px;
 }
+
+.account-panel {
+    position: relative;
+    display: block;
+    max-width: 410px;
+    justify-self: center;
+}
+
+.account-panel h5 {
+    text-align: center;
+}
+
+.account-panel h5 span {
+    color: #363636;
+    font-weight: 700;
+}
+
+.account-panel h5 a {
+    color: #363636;
+    font-weight: 700;
+    border-bottom: 2px solid #dbdedf;
+}
+
+.account-panel h5 a:hover {
+    color: #363636;
+}
+
+.account-panel p {
+    margin-top: 30px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #808080;
+}
+
+.account-panel p a {
+    color: #3b3b3b;
+    text-transform: uppercase;
+    border-bottom: 2px solid #dbdedf;
+}
+
+.account-panel p a:hover {
+    color: #3b3b3b;
+}
+
+.account-panel .btn-submit {
+    position: absolute;
+    right: 0;
+    cursor: pointer;
+    border: none;
+    padding: 17px 80px;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+.account-panel ul {
+    margin-top: 30px;
+    padding-left: 30px;
+}
+
+.registration-panel input[type=email] {
+    display: block;
+    font-size: 14px;
+    line-height: 48px;
+    padding: 0 15px;
+    color: #363636;
+    width: 100%;
+    border: 1px solid #000;
+    margin: 20px 0px;
+    -webkit-animation: fadeInUp 0.3s both 0.1s cubic-bezier(0.26, 0.63, 0.68, 1.04);
+    animation: fadeInUp 0.3s both 0.1s cubic-bezier(0.26, 0.63, 0.68, 1.04);
+}

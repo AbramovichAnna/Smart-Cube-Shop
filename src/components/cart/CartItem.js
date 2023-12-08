@@ -1,12 +1,23 @@
 import React from 'react';
+import { HOST_URL } from '../../common/constants.js';
 
-function CartItem({ item, removeFromCart }) {
+function CartItem({ item, updateCart, removeFromCart}) {
+    console.log("Cart Item");
+    
+
+
+
     return (
-        <div>
-            <h3>{item.product.title}</h3>
-            <p>Quantity: {item.quantity}</p>
-            <p>Price: ${item.price}</p>
-            <button onClick={() => removeFromCart(item.product.id)}>Remove</button>
+        <div className="cart-item">
+            <img src={`${HOST_URL}${item.product.image}`} alt="product-img" />
+            <div>
+                <h4>{item.product.title}</h4>
+                <p>Price: ${item.product.price}</p>
+                <p>Quantity: {item.quantity}</p>
+                <button onClick={() => updateCart(item.product, item.quantity + 1)}>+</button>
+                <button onClick={() => updateCart(item.product, item.quantity - 1)}>-</button>
+                <button onClick={() => removeFromCart(item.product)}>Remove</button>
+            </div>
         </div>
     );
 }

@@ -1,23 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { IoMdCheckmark } from 'react-icons/io';
+import { IoMdCheckmark, IoMdClose } from 'react-icons/io';
 import "./ProductDetails.css";
 import Services from '../Services';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import AddToCartButton from './AddToCartButton';
 
-function ProductDetails({addToCart}) {
+function ProductDetails({ addToCart}) {
 
     const [product, setProduct] = useState({});
     const { productId } = useParams();
 
     const HOST_URL = 'https://shop-api-763v.onrender.com';
-    // HOST_URL = "http://localhost:8000"
 
     useEffect(() => {
-        getProductDetails();
-    }, [productId]);
-
-    function getProductDetails() {
         axios.get(`${HOST_URL}/product/${productId}`)
             .then(response => {
                 setProduct(response.data);
@@ -25,7 +21,18 @@ function ProductDetails({addToCart}) {
             .catch(error => {
                 console.error('Error fetching product details:', error);
             });
-    }
+    }, [productId]);
+
+
+
+    // Updated function to return both new price and discount flag
+    const calculateNewPrice = () => {
+        if (product.discount && product.discount > 0) {
+            const discountAmount = product.originalPrice * (product.discount / 100);
+            return { newPrice: product.originalPrice - discountAmount, hasDiscount: true };
+        }
+        return { newPrice: product.originalPrice, hasDiscount: false }; // Return original price with discount flag as false
+    };
 
     return (
         <>
@@ -46,25 +53,24 @@ function ProductDetails({addToCart}) {
                                 <ul>
                                     <li>
                                         {product.brand && <>
-                                                <h5>Brand</h5>
-                                                <h5>{product.brand.name}</h5></>
+                                            <h5>Brand</h5>
+                                            <h5>{product.brand.name}</h5></>
                                         }
                                     </li>
                                     <li>
                                         {product.category && <>
-                                                <h5>Category</h5>
-                                                <h5>{product.category.name}</h5></>
+                                            <h5>Category</h5>
+                                            <h5>{product.category.name}</h5></>
                                         }
                                     </li>
                                     <li>
                                         {product.type && <>
-                                                <h5>Type</h5>
-                                                <h5>{product.type.name}</h5></>
+                                            <h5>Type</h5>
+                                            <h5>{product.type.name}</h5></>
                                         }
                                     </li>
                                 </ul>
                             </div>
-
 
                             <div className="prod_details_ratings">
                                 {/* Ratings and other details can go here */}
@@ -75,41 +81,43 @@ function ProductDetails({addToCart}) {
                             <div className="prod_details_price">
                                 <div className="price_box">
                                     <h2 className="price">
-                                        {product.price} &nbsp;
-                                        {/* Assuming there's a field for the discounted price */}
-                                        <small className="del_price">
-                                            <del>{product.originalPrice}</del>
-                                        </small>
+                                        {/* Check for discount */}
+                                        {product.discount && product.discount > 0 ? (
+                                            <>
+                                                <strong>${calculateNewPrice().newPrice.toFixed(2)}</strong> &nbsp;
+                                                <small className="del_price">
+                                                    <del>${product.originalPrice}</del>
+                                                </small>
+                                            </>
+                                        ) : (
+                                            <strong>${product.originalPrice}</strong>
+                                        )}
                                     </h2>
                                     <span className="tax_txt">(Inclusive of all taxes)</span>
                                 </div>
-
                                 <div className="badge">
-                                    <span><IoMdCheckmark /> In Stock</span>
+                                    {product.inStock > 0 ? (
+                                        <span className="in_stock"><IoMdCheckmark />In Stock</span>
+                                    ) : (
+                                        <span className="out_of_stock"><IoMdClose />Out of Stock</span>
+                                    )}
+
                                 </div>
                             </div>
-
                             <div className="separator"></div>
-
-                            <div className="prod_details_offers">
-                                <h4>Offers and Discounts</h4>
-                                <ul>
-                                    <li>No Cost EMI on Credit Card</li>
-                                    <li>Pay Later & Avail Cashback</li>
-                                    {/* Add more offers here */}
-                                </ul>
+                            <div className="prod_details_info">
+                                <h5>Description</h5>
+                                {/* <p>{product.info}</p> */}
                             </div>
 
                             <div className="separator"></div>
 
                             <div className="prod_details_buy_btn">
-                                <button
-                                    type="button"
-                                    className="btn"
-                                onClick={addToCart}
-                                >
-                                    Add to cart
-                                </button>
+                                <AddToCartButton
+                                    productId={product.id}
+                                    addToCart={addToCart}
+                                    // userId={userId}
+                                />
                             </div>
                         </div>
                     </div>
@@ -122,6 +130,3 @@ function ProductDetails({addToCart}) {
 };
 
 export default ProductDetails;
-
-
-

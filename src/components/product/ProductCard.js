@@ -2,18 +2,16 @@ import React from 'react';
 import "./ProductCard.css";
 import { IoMdStar } from 'react-icons/io';
 import { useNavigate } from 'react-router-dom';
-
+import { HOST_URL } from '../../common/constants.js';
+import AddToCartButton from './AddToCartButton.js';
 
 function ProductCard({ product, addToCart }) {
-    const HOST_URL = 'https://shop-api-763v.onrender.com';
-    const imageUrl = HOST_URL + product.image;
-
+    const imageUrl = `${HOST_URL}${product.image}`;
 
     const navigate = useNavigate();
     const navigateToProductDetails = () => {
-        navigate(`/product/${product.id}`); 
+        navigate(`/product/${product.id}`);
     };
-
 
     // Function to render stars based on the rating
     const renderStars = () => {
@@ -21,45 +19,52 @@ function ProductCard({ product, addToCart }) {
         return [...Array(rating)].map((_, i) => <IoMdStar key={i} />);
     };
 
-    // price after discount
+    // Updated function to return both new price and discount flag
     const calculateNewPrice = () => {
         if (product.discount && product.discount > 0) {
             const discountAmount = product.originalPrice * (product.discount / 100);
-            return product.originalPrice - discountAmount;
+            return { newPrice: product.originalPrice - discountAmount, hasDiscount: true };
         }
-        return null; // Return null if there's no discount
+        return { newPrice: product.originalPrice, hasDiscount: false }; // Return original price with discount flag as false
     };
 
+    // --------------------------------------------------- RENDER PRODUCT CARD COMPONENT----------------------------------------------
     return (
         <div className="card products_card">
             <div className="products_img">
                 <img src={imageUrl} alt="product-img" onClick={navigateToProductDetails} />
             </div>
-        
+
             <div className="products_details">
                 <span className="rating_star">{renderStars()}</span>
-                <h5 className="products_title" onClick={navigateToProductDetails} style={{fontWeight: "700"}}>{product.title}</h5>
+                <h5 className="products_title" onClick={navigateToProductDetails} style={{ fontWeight: "700" }}>{product.title}</h5>
                 <h5 className="products_info">Brand : {product.brand.name}</h5>
                 <div className="separator"></div>
                 <h4 className="products_price">
-                    {calculateNewPrice() !== null ? (
+                    {calculateNewPrice().hasDiscount ? (
                         <>
-                            <strong>${calculateNewPrice().toFixed(2)}</strong> &nbsp;
+                            <strong>${calculateNewPrice().newPrice.toFixed(2)}</strong> &nbsp;
                             <small><del>${product.originalPrice}</del></small>
                         </>
                     ) : (
-                        <strong>${product.originalPrice}</strong>
+                        <strong>${product.originalPrice}</strong> // Display original price only
                     )}
                 </h4>
 
-                <button className="btn products_btn " onClick={() => addToCart(product.id)}>
-                    Add to cart
-                </button>
+                {/* Display stock status */}
+                <p className="stock_status">
+                    {product.inStock > 0 ? "In Stock" : "Not Available"}
+                </p>
 
+                {/* Add to cart button */}
+                <AddToCartButton
+                    productId={product.id} 
+                    addToCart={addToCart}
+                    // userId={userId}
+                />
             </div>
         </div>
     );
 }
 
 export default ProductCard;
-

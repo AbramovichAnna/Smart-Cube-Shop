@@ -6,128 +6,88 @@ import Navbar from "./components/header/Navbar";
 import AllProducts from "./Pages/AllProducts";
 import NotFoundPage from "./Pages/NotFoundPage";
 import Footer from "./components/footer/Footer";
-import './App.css';
 import GiftCards from "./components/giftcards/Giftcards";
 import Login from "./components/Login";
 import ProductDetails from "./components/product/ProductDetails";
 import Cart from "./components/cart/Cart";
+import './App.css';
+import { HOST_URL } from './common/constants.js';
 
 function App() {
+
   const [products, setProducts] = useState([]);
-  const [product, setProduct] = useState(null);
-  const [productId, setProductId] = useState(null);
-  const [selectedProduct, setSelectedProduct] = useState(null);
   const [categories, setCategories] = useState([]);
   const [cartItems, setCartItems] = useState([]);
-  const [search, setSearch] = useState("");
-  const [currentCategory, setCurrentCategory] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const HOST_URL = "https://shop-api-763v.onrender.com";
-  // HOST_URL = "http://localhost:8000"
+  useEffect(() => {
+    const fetchAllData = async () => {
+      try {
+        const [productsResponse, categoriesResponse, cartItemsResponse] = await Promise.all([
+          axios.get(`${HOST_URL}/products`),
+          axios.get(`${HOST_URL}/categories`),
+          axios.get(`${HOST_URL}/cart_items`)
+        ]);
 
-  //---------------------------------------------------------------------------- GET PRODUCTS
-  function getProducts() {
-    axios.get(HOST_URL + "/products")
-      .then(response => {
-        setProducts(response.data);
-      })
-      .catch(error => {
-        console.error("Error fetching data:", error);
-      });
+        setProducts(productsResponse.data);
+        setCategories(categoriesResponse.data);
+        setCartItems(cartItemsResponse.data);
+      } catch (error) {
+        setError('Error fetching data');
+        console.error('Error fetching data', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchAllData();
+  }, []);
+
+  // Check for loading or error states
+  if (isLoading) {
+    return <div>Loading...</div>;
   }
-  //---------------------------------------------------------------------------- GET PRODUCTS BY CATEGORY 
-  function getProductsByCategory(categoryId) {
-    axios.get(HOST_URL + "/products?categoryId=" + categoryId)
-      .then(response => {
-        setProducts(response.data);
-      })
-      .catch(error => {
-        console.error("Error fetching data:", error);
-      });
+
+  if (error) {
+    return <div>Error: {error}</div>;
   }
-  //---------------------------------------------------------------------------- GET PRODUCTS BY SEARCH
-  function getProductsBySearch(searchText) {
-    axios.get(HOST_URL + "/products?title=" + searchText)
-      .then(response => {
-        setProducts(response.data);
-      })
-      .catch(error => {
-        console.error("Error fetching data:", error);
-      });
-  }
-  //---------------------------------------------------------------------------- GET CATEGORIES
-  function getCategories() {
-    axios.get(HOST_URL + "/categories")
-      .then(response => {
-        setCategories(response.data);
-      })
-      .catch(error => {
-        console.error("Error fetching data:", error);
-      });
-  }
-  //---------------------------------------------------------------------------- GET CART ITEMS
-  function getCartItems() {
-    axios.get(HOST_URL + "/cart")
-      .then(response => {
-        setCartItems(response.data);
-      })
-      .catch(error => {
-        console.error("Error fetching data:", error);
-      });
-  }
-  //---------------------------------------------------------------------------- ADD TO CART
-  function addToCart(productId) {
-    axios.post(HOST_URL + "/cart", { productId })
-      .then(response => {
-        setCartItems([...cartItems, response.data]);
-      })
-      .catch(error => {
-        console.error("Error fetching data:", error);
-      });
-  }
-  //---------------------------------------------------------------------------- REMOVE FROM CART
-  function removeFromCart(productId) {
-    axios.delete(HOST_URL + "/cart/" + productId)
-      .then(response => {
-        setCartItems(cartItems.filter(item => item.product.id !== productId));
-      })
-      .catch(error => {
-        console.error("Error fetching data:", error);
-      });
-  }
-  //---------------------------------------------------------------------------- HANDLE SEARCH
-  function handleSearch(searchText) {
-    setSearch(searchText);
-    axios.get(HOST_URL + "/products?title=" + searchText)
-      .then(response => {
-        setProducts(response.data);
-      })
-      .catch(error => {
-        console.error("Error fetching data:", error);
-      });
-  }
+
+
+  const handleAddToCart = async (productId) => {
+    try {
+      const payload = { 
+        product_id: productId, 
+        quantity: 1, 
+      };
+        console.log("payload", payload);
+      const response = await axios.post(`${HOST_URL}/cart_items/`, payload);
+      setCartItems(response.data);
+      console.log('Item added to cart', response.data);
+    } catch (error) {
+      console.error('Error adding item to cart', error);
+    }
+  };
   
-    //---------------------------------------------------------------------------- USE EFFECT
-    useEffect(getProducts, []);
-    useEffect(getCategories, []);
-    useEffect(getCartItems, []);
+    
 
 
-    return (
-      <BrowserRouter>
-        <Navbar cartItems={cartItems} handleSearch={handleSearch} />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/all-products" element={<AllProducts products={products} addToCart={addToCart} categories={categories} />} />
-          <Route path="/product/:productId" element={<ProductDetails product={product} />} />
-          <Route path="/gift-cards" element={<GiftCards />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/cart" element={<Cart cartItems={cartItems} removeFromCart={removeFromCart} />} />
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
-        <Footer />
-      </BrowserRouter>
-    );
-  }
+  // --------------------------------------------------- RENDER ----------------------------------------------
+  return (
+    <BrowserRouter>
+      <Navbar cartItems={cartItems} />
+      <Routes>
+        <Route path="/Smart-Cube-Shop" element={<HomePage />} />
+        <Route path="/all-products" element={<AllProducts products={products} categories={categories} onAddToCart={handleAddToCart} />} />
+        <Route path="/product/:productId" element={<ProductDetails />} />
+        <Route path="/gift-cards" element={<GiftCards />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/cart" element={<Cart cartItems={cartItems} />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+      <Footer />
+    </BrowserRouter>
+  );
+}
 
-  export default App;
+export default App;

@@ -3,9 +3,10 @@ import { useEffect, useState } from "react";
 import "./GiftCards.css";
 import GiftCard from "./GiftCard";
 import { GoGift } from "react-icons/go";
+import { HOST_URL } from '../../common/constants';
 
 function GiftCards() {
-    const HOST_URL = "https://shop-api-763v.onrender.com";
+
     const [giftCards, setGiftCards] = useState([]);
     const [selectedCard, setSelectedCard] = useState(null);
     const [isOpen, setIsOpen] = useState(false);

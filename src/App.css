@@ -12,11 +12,6 @@ body {
   color: #E6E5E4;
 }
 
-/* body {
-  background-color: #161a1e;
-  overflow-x: hidden;
-} */
-
 /* ::-webkit-scrollbar {
   width: 10px;
 } */
@@ -129,8 +124,6 @@ button {
   box-shadow: none;
 }
 
-
-
 .btn-primary {
   background: #fff;
   color: #3b3b3b;
@@ -182,5 +175,6 @@ button {
     padding: 0;
     box-sizing: border-box;
 }
+
 
 

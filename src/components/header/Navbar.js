@@ -37,19 +37,20 @@ function Navbar({ searchQuery, setSearchQuery}) {
             return;
         }
         else if (section === "home") {
-            navigate('/');
+            navigate('/Smart-Cube-Shop');
             return;
         }
 
         setActiveSection((prevSection) => (prevSection === section ? "" : section));
     };
+    
 
 
     return (
         <div className="navbar">
-            <Link to="/" className="navbar-left">
+            <Link to="/Smart-Cube-Shop" className="navbar-left">
                 <div className="navbar-logo">
-                    <img src="images/logo_2.png" alt="logo-2" />
+                    <img src="/images/logo_2.png" alt="logo-2" />
                 </div>
                 <div className="logo-text">
                     <h3>Smart Cube</h3>
