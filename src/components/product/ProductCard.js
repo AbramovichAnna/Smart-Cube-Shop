@@ -44,7 +44,7 @@ function ProductCard({ product, addToCart }) {
                     {calculateNewPrice().hasDiscount ? (
                         <>
                             <strong>${calculateNewPrice().newPrice.toFixed(2)}</strong> &nbsp;
-                            <small><del>${product.originalPrice}</del></small>
+                            <small style={{color: "gray"}}><del>${product.originalPrice}</del></small>
                         </>
                     ) : (
                         <strong>${product.originalPrice}</strong> // Display original price only

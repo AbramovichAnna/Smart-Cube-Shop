@@ -56,12 +56,12 @@ function App() {
 
   const handleAddToCart = async (productId) => {
     try {
-      const payload = { 
+      const addingProduct = { 
         product_id: productId, 
         quantity: 1, 
       };
-        console.log("payload", payload);
-      const response = await axios.post(`${HOST_URL}/cart_items/`, payload);
+        // console.log("add product :", addingProduct);
+      const response = await axios.post(`${HOST_URL}/cart_items/`, addingProduct);
       setCartItems(response.data);
       console.log('Item added to cart', response.data);
     } catch (error) {
@@ -77,7 +77,7 @@ function App() {
     <BrowserRouter>
       <Navbar cartItems={cartItems} />
       <Routes>
-        <Route path="/Smart-Cube-Shop" element={<HomePage />} />
+        <Route path="/Smart-Cube-Shop" element={<HomePage products={products}/>} />
         <Route path="/all-products" element={<AllProducts products={products} categories={categories} onAddToCart={handleAddToCart} />} />
         <Route path="/product/:productId" element={<ProductDetails />} />
         <Route path="/gift-cards" element={<GiftCards />} />

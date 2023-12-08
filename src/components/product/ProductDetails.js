@@ -5,24 +5,24 @@ import Services from '../Services';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import AddToCartButton from './AddToCartButton';
+import { HOST_URL } from '../../common/constants';
 
-function ProductDetails({ addToCart}) {
+function ProductDetails({ addToCart }) {
 
     const [product, setProduct] = useState({});
-    const { productId } = useParams();
 
-    const HOST_URL = 'https://shop-api-763v.onrender.com';
+    const { productId } = useParams();
 
     useEffect(() => {
         axios.get(`${HOST_URL}/product/${productId}`)
             .then(response => {
+                console.log(response.data); // Log to check the structure
                 setProduct(response.data);
             })
             .catch(error => {
                 console.error('Error fetching product details:', error);
             });
     }, [productId]);
-
 
 
     // Updated function to return both new price and discount flag
@@ -116,7 +116,7 @@ function ProductDetails({ addToCart}) {
                                 <AddToCartButton
                                     productId={product.id}
                                     addToCart={addToCart}
-                                    // userId={userId}
+                                // userId={userId}
                                 />
                             </div>
                         </div>

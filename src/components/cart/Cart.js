@@ -1,54 +1,99 @@
 import React from 'react';
 import CartItem from './CartItem';
-import axios from 'axios';
-import { HOST_URL } from '../../common/constants';
-import './Cart.css';
+import "./Cart.css";
 
-function Cart({ cartItems, setCartItems }) {
-    console.log("Cart Page");
+function Cart({ cartItems, onUpdateCartQty, onRemoveFromCart}) {
 
-
-
-    const updateCart = (product, quantity) => {
-        if (quantity <= 0) {
-            removeFromCart(product);
-        } else {
-            axios.put(`${HOST_URL}/cart_items/${product.id}`, { quantity })
-                .then(response => {
-                    // Update the state with the new cart items
-                    setCartItems(response.data);
-                })
-                .catch(error => console.error('Error updating cart item', error));
-        }
+    
+    const handleUpdateCartQty = (productId, quantity) => {
+        onUpdateCartQty(productId, quantity);
     };
 
-
-    const removeFromCart = (product) => {
-        axios.delete(`${HOST_URL}/cart_items/${product.id}`)
-            .then(() => {
-                // Update the state to remove the item from the cart
-                setCartItems(prevItems => prevItems.filter(item => item.product.id !== product.id));
-            })
-            .catch(error => console.error('Error removing item from cart', error));
+    const handleRemoveFromCart = (productId) => {
+        onRemoveFromCart(productId);
     };
+
+    const calculateOrderSummary = () => {
+        let originalPriceTotal = 0;
+        let discountTotal = 0;
+        let newPriceTotal = 0;
+
+        cartItems.forEach((item) => {
+            const originalPrice = item.product.originalPrice;
+            const discount = item.product.discount || 0;
+            const discountAmount = originalPrice * (discount / 100);
+            const newPrice = originalPrice - discountAmount;
+
+            originalPriceTotal += originalPrice * item.quantity;
+            discountTotal += discountAmount * item.quantity;
+            newPriceTotal += newPrice * item.quantity;
+        });
+
+        return {
+            originalPriceTotal: originalPriceTotal.toFixed(2),
+            discountTotal: discountTotal.toFixed(2),
+            newPriceTotal: newPriceTotal.toFixed(2)
+        };
+    };
+
+    const orderSummary = calculateOrderSummary();
 
 
     return (
-        <div>
-            <h2>Your Cart</h2>
-            {cartItems.length > 0 ? (
-                cartItems.map(item => (
-                    <CartItem
-                        key={item.id}
-                        item={item}
-                        updateCart={updateCart}
-                        removeFromCart={removeFromCart}
-                    />
-                ))
-            ) : (
-                <p>Your cart is empty</p>
-            )}
-        </div>
+        <>
+            <section id="cart" className="section">
+                <div className="cart-container">
+                    {cartItems.length === 0 ? (
+                        <p>Your cart is empty</p>
+                    ) : (
+                        <div className="wrapper cart_wrapper">
+                            <div className="cart_left_col">
+                                {
+                                    cartItems.map((item) => (
+                                        <CartItem
+                                            key={item.product.id}
+                                            item={item}
+                                            onUpdateCartQty={handleUpdateCartQty}
+                                            onRemoveFromCart={handleRemoveFromCart}
+                                        />
+                                    ))
+                                }
+                            </div>
+
+                            <div className="cart_right_col">
+                                <div className="order_summary">
+                                    <h3>
+                                        Order Summary &nbsp;
+                                        {/* ( {cartQuantity} {cartQuantity > 1 ? 'items' : 'item'} ) */}
+                                    </h3>
+                                    <div className="order_summary_details">
+                                        <div className="price">
+                                            <span>Original Price</span>
+                                            <b>${orderSummary.originalPriceTotal}</b>
+                                        </div>
+                                        <div className="discount">
+                                            <span>Discount</span>
+                                            <b>- ${orderSummary.discountTotal}</b>
+                                        </div>
+                                        <div className="delivery">
+                                            <span>Delivery</span>
+                                            <b>Free</b>
+                                        </div>
+                                        <div className="separator"></div>
+                                        <div className="total_price">
+                                            <b><small>Total Price</small></b>
+                                            <b>${orderSummary.newPriceTotal}</b>
+                                        </div>
+                                    </div>
+                                    <button type="button" className="btn checkout_btn">Checkout</button>
+                                </div>
+                            </div>
+                        </div>
+                    )
+                    }
+                </div>
+            </section>
+        </>
     );
 }
 

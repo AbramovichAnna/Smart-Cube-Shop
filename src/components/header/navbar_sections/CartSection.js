@@ -1,28 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../../cart/CartItem'
+import CartItem from '../../cart/CartItem';
 
 
-function CartSection({ cartItems}) {
-
-
-    // // Function to render cart items
-    // const renderCartItems = () => {
-    //     return cartItems.map(item => (
-    //         <li className="cart-item" key={item.id}>
-    //             <div className="cart-item-details">
-    //                 <h6>{item.product.title}</h6>
-    //                 <p>Unit Price: <span>${item.product.originalPrice}</span></p>
-    //                 {/* Add actions for item quantity update here */}
-    //             </div>
-    //         </li>
-    //     ));
-    // }
+function CartSection({ cartItems }) {
 
     return (
         <div className="toolbar-section cart" id="cart">
             <div className="inner">
-                {cartItems ?  (
+                {cartItems ? (
                     // Case: Cart is Empty
                     <div className="empty-page-content text-center">
                         <h3>Shopping Cart</h3>
@@ -33,19 +20,19 @@ function CartSection({ cartItems}) {
                     // Case: Items exist in Cart
                     <>
                         <ul className="cart-list">
-                            {/* {renderCartItems()} */}
+                            <CartItem />
                         </ul>
                         <Link
                             to="/cart"
                             className="btn btn-primary mr-3"
-                            // onClick={() => handleToggle(null)}
+                        // onClick={() => handleToggle(null)}
                         >
                             View Cart
                         </Link>
                         <Link
                             to="#"
                             className="btn btn-secondary"
-                            // onClick={() => handleToggle(null)}
+                        // onClick={() => handleToggle(null)}
                         >
                             Checkout
                         </Link>

@@ -4,26 +4,6 @@
     grid-gap: 0.7rem;
 }
 
-@media (max-width: /* lg breakpoint */) {
-    .products_wrapper {
-        grid-template-columns: repeat(3, 1fr);
-        grid-gap: 0.7rem;
-    }
-}
-
-@media (max-width: /* md breakpoint */) {
-    .products_wrapper {
-        grid-template-columns: repeat(2, 1fr);
-        grid-gap: 0.6rem;
-    }
-}
-
-@media (max-width: /* xs breakpoint */) {
-    .products_wrapper {
-        grid-template-columns: 1fr;
-    }
-}
-
 .products_filter_tabs {
     margin-top: 3rem;
     margin-bottom: 5rem;
