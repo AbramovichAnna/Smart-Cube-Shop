@@ -1,0 +1,124 @@
+
+
+.hero_wrapper {
+    position: relative;
+    display: grid;
+    grid-template-columns: 0.4fr 1fr;
+    gap: 2rem;
+    place-content: center;
+    place-items: center;
+
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 10%;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        font-size: 15rem;
+        font-weight: 700;
+        opacity: 0.05;
+    }
+
+    &.hero_item_txt::before {
+        content: attr(data-brand);
+    }
+
+
+
+    @media (max-width: 1200px) {
+
+        /* xl */
+        .hero_wrapper::before {
+            font-size: 12rem;
+        }
+    }
+
+    @media (max-width: 992px) {
+
+        /* lg */
+        .hero_wrapper {
+            grid-template-columns: 0.7fr;
+            gap: 4rem;
+        }
+
+        .hero_wrapper::before {
+            font-size: 8rem;
+        }
+    }
+
+    @media (max-width: 576px) {
+
+        /* sm */
+        .hero_wrapper {
+            grid-template-columns: 0.9fr;
+            gap: 2rem;
+        }
+
+        .hero_item_txt h1 {
+            font-size: 1.8rem;
+        }
+
+        .hero_item_txt h3 {
+            font-size: 1rem;
+        }
+
+        .hero_price {
+            margin-top: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .hero_item_img {
+            max-width: 10rem;
+            width: 100%;
+        }
+
+        .hero_item_img img {
+            width: 50%;
+        }
+    }
+
+    @media (max-width: 360px) {
+
+        /* xs */
+        .hero_item_txt h1 {
+            font-size: 1.5rem;
+        }
+    }
+}
+
+.hero_item_txt,
+.hero_item_img {
+    position: relative;
+}
+
+.hero_item_txt {
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+
+    h1 {
+        font-size: 3rem;
+        text-transform: capitalize;
+        word-spacing: 3px;
+        margin-top: 0.8rem;
+        margin-bottom: 1rem;
+    }
+
+    h3 {
+        font-size: 1.3rem;
+        font-weight: 600;
+    }
+
+    .hero_price {
+        margin-top: 2rem;
+        margin-bottom: 3rem;
+    }
+}
+
+.hero_item_img {
+    overflow: hidden;
+
+    img {
+        object-fit: cover;
+    }
+}
