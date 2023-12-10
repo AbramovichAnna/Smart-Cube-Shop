@@ -1,18 +1,14 @@
 import React from 'react';
 import CartItem from './CartItem';
 import "./Cart.css";
+import { useEffect } from 'react';
 
-function Cart({ cartItems, onUpdateCartQty, onRemoveFromCart}) {
+function Cart({ cartItems, onIncrease, onDecrease, onRemove }) {
+    useEffect(() => {
+        console.log("Current cartItems:", cartItems);
+    }, [cartItems]);
 
-    
-    const handleUpdateCartQty = (productId, quantity) => {
-        onUpdateCartQty(productId, quantity);
-    };
-
-    const handleRemoveFromCart = (productId) => {
-        onRemoveFromCart(productId);
-    };
-
+    // ORDER SUMMARY
     const calculateOrderSummary = () => {
         let originalPriceTotal = 0;
         let discountTotal = 0;
@@ -28,16 +24,13 @@ function Cart({ cartItems, onUpdateCartQty, onRemoveFromCart}) {
             discountTotal += discountAmount * item.quantity;
             newPriceTotal += newPrice * item.quantity;
         });
-
         return {
             originalPriceTotal: originalPriceTotal.toFixed(2),
             discountTotal: discountTotal.toFixed(2),
             newPriceTotal: newPriceTotal.toFixed(2)
         };
     };
-
     const orderSummary = calculateOrderSummary();
-
 
     return (
         <>
@@ -53,8 +46,10 @@ function Cart({ cartItems, onUpdateCartQty, onRemoveFromCart}) {
                                         <CartItem
                                             key={item.product.id}
                                             item={item}
-                                            onUpdateCartQty={handleUpdateCartQty}
-                                            onRemoveFromCart={handleRemoveFromCart}
+                                            onIncrease={() => onIncrease(item)}
+                                            onDecrease={() => onDecrease(item)}
+                                            onRemove={() => onRemove(item)}
+
                                         />
                                     ))
                                 }

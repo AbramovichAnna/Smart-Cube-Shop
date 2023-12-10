@@ -1,91 +1,53 @@
+#hero {
+    min-height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
+    .swiper {
+        width: 100%;
+        height: 100%;
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+    }
+
+    .swiper-pagination {
+        bottom: 30px;
+    }
+}
 
 .hero_wrapper {
     position: relative;
     display: grid;
-    grid-template-columns: 0.4fr 1fr;
+    grid-template-columns: 0.5fr 1fr;
     gap: 2rem;
     place-content: center;
     place-items: center;
+}
 
+.hero_wrapper::before {
+    content: attr(data-brand);
+    position: absolute;
+    top: 10%;
+    left: 0;
+    right: 0;
+    font-size: 15rem;
+    font-weight: 700;
+    opacity: 0.05;
+}
 
-    &::before {
-        content: '';
-        position: absolute;
-        top: 10%;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        font-size: 15rem;
-        font-weight: 700;
-        opacity: 0.05;
-    }
-
-    &.hero_item_txt::before {
-        content: attr(data-brand);
-    }
-
-
-
-    @media (max-width: 1200px) {
-
-        /* xl */
-        .hero_wrapper::before {
-            font-size: 12rem;
-        }
-    }
-
-    @media (max-width: 992px) {
-
-        /* lg */
-        .hero_wrapper {
-            grid-template-columns: 0.7fr;
-            gap: 4rem;
-        }
-
-        .hero_wrapper::before {
-            font-size: 8rem;
-        }
-    }
-
-    @media (max-width: 576px) {
-
-        /* sm */
-        .hero_wrapper {
-            grid-template-columns: 0.9fr;
-            gap: 2rem;
-        }
-
-        .hero_item_txt h1 {
-            font-size: 1.8rem;
-        }
-
-        .hero_item_txt h3 {
-            font-size: 1rem;
-        }
-
-        .hero_price {
-            margin-top: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .hero_item_img {
-            max-width: 10rem;
-            width: 100%;
-        }
-
-        .hero_item_img img {
-            width: 50%;
-        }
-    }
-
-    @media (max-width: 360px) {
-
-        /* xs */
-        .hero_item_txt h1 {
-            font-size: 1.5rem;
-        }
-    }
+.hero_item_txt::before {
+    content: attr(data-brand);
+    position: absolute;
+    top: -200px;
+    left: -100px;
+    color: rgb(195, 195, 195);
+    font-size: 17rem;
+    font-weight: 700;
+    opacity: 0.05;
+    /* Ensure it's a visible color */
 }
 
 .hero_item_txt,
@@ -117,8 +79,9 @@
 
 .hero_item_img {
     overflow: hidden;
-
-    img {
-        object-fit: cover;
-    }
+    margin-right: -40%;
 }
+
+.hero_item_img img {
+    width:70%;
+    transition: transform 0.25s ease;}

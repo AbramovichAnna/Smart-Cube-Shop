@@ -5,24 +5,26 @@ import Services from '../Services';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import AddToCartButton from './AddToCartButton';
-import { HOST_URL } from '../../common/constants';
+import { HOST_URL } from '../../common/constants.js';
 
-function ProductDetails({ addToCart }) {
+function ProductDetails({ onAddToCart }) {
 
     const [product, setProduct] = useState({});
 
     const { productId } = useParams();
 
+
     useEffect(() => {
         axios.get(`${HOST_URL}/product/${productId}`)
             .then(response => {
-                console.log(response.data); // Log to check the structure
+                // console.log("product details : ", response.data);
                 setProduct(response.data);
             })
             .catch(error => {
                 console.error('Error fetching product details:', error);
             });
     }, [productId]);
+
 
 
     // Updated function to return both new price and discount flag
@@ -54,19 +56,19 @@ function ProductDetails({ addToCart }) {
                                     <li>
                                         {product.brand && <>
                                             <h5>Brand</h5>
-                                            <h5>{product.brand.name}</h5></>
+                                            <h5>{product.brand}</h5></>
                                         }
                                     </li>
                                     <li>
                                         {product.category && <>
                                             <h5>Category</h5>
-                                            <h5>{product.category.name}</h5></>
+                                            <h5>{product.category}</h5></>
                                         }
                                     </li>
                                     <li>
                                         {product.type && <>
                                             <h5>Type</h5>
-                                            <h5>{product.type.name}</h5></>
+                                            <h5>{product.type}</h5></>
                                         }
                                     </li>
                                 </ul>
@@ -107,16 +109,16 @@ function ProductDetails({ addToCart }) {
                             <div className="separator"></div>
                             <div className="prod_details_info">
                                 <h5>Description</h5>
-                                {/* <p>{product.info}</p> */}
+                                <p>{product.info}</p>
                             </div>
 
                             <div className="separator"></div>
 
                             <div className="prod_details_buy_btn">
                                 <AddToCartButton
-                                    productId={product.id}
-                                    addToCart={addToCart}
-                                // userId={userId}
+                                    key={product.id}
+                                    product={product}
+                                    addToCart={() => onAddToCart(product.id)}
                                 />
                             </div>
                         </div>

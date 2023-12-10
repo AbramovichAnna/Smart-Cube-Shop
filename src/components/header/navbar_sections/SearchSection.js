@@ -1,43 +1,32 @@
 import React, { useState } from 'react';
+import './AccountSection.css'; // Assuming the styles are in this CSS file
 
-function SearchSection({ items }) {
-    const [searchQuery, setSearchQuery] = useState('');
-    const [searchResults, setSearchResults] = useState([]);
+function SearchSection({ setSearchQuery, handleSearchSubmit }) {
 
-    const handleSearch = (event) => {
-        setSearchQuery(event.target.value);
+    const [localSearchQuery, setLocalSearchQuery] = useState("");
+
+    const onSearchChange = (e) => {
+        setLocalSearchQuery(e.target.value);
     };
 
-    const handleSearchSubmit = (event) => {
-        event.preventDefault();
-
-        // Perform the search logic here (e.g., filter products based on search query)
-        const filteredProducts = items.filter((product) =>
-            product.name.toLowerCase().includes(searchQuery.toLowerCase())
-        );
-
-        setSearchResults(filteredProducts);
+    const onSearchSubmit = (e) => {
+        e.preventDefault();
+        setSearchQuery(localSearchQuery);
+        handleSearchSubmit();
     };
+
     return (
-        <div>
-            <form onSubmit={handleSearchSubmit}>
+        <div className="login-panel"> {/* Reuse the login-panel class */}
+            <form onSubmit={onSearchSubmit}>
                 <input
                     type="text"
                     placeholder="Search for products"
-                    value={searchQuery}
-                    onChange={handleSearch}
+                    value={localSearchQuery}
+                    onChange={onSearchChange}
+                    className="search-panel input" 
                 />
-                <button type="submit">Search</button>
+                <button type="submit" className="btn btn-submit">Search</button> {/* Apply the button style */}
             </form>
-
-            <h2>Search Results:</h2>
-            <ul>
-                {searchResults.map((product) => (
-                    <li key={product.id}>
-                        <strong>{product.name}</strong>: {product.description}
-                    </li>
-                ))}
-            </ul>
         </div>
     );
 }

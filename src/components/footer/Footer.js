@@ -43,8 +43,8 @@ function Footer() {
 
                         <div className="social-links">
                             <div className="foot_social_links social_links">
-                                <FaLinkedin className="footer-icon" />
-                                <FaGithub className="footer-icon" />
+                                <FaLinkedin className="footer-icon" href='/'/>
+                                <FaGithub className="footer-icon" href='https://github.com/AbramovichAnna/Smart-Cube-Shop'/>
                             </div>
                             <div className="foot_vr_line"></div>
 

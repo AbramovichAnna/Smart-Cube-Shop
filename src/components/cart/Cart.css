@@ -8,8 +8,8 @@
     flex-direction: column;
     grid-template-columns: auto 1fr;
     gap: 3rem;
-    padding-top: 3rem;
-    padding-bottom: 3rem;
+    /* padding-top: 3rem; */
+    /* padding-bottom: 3rem; */
 }
 
 .cart_wrapper {
@@ -43,8 +43,8 @@
 
 .cart_left_col {
     max-height: 500px;
-    width: 100%;
-    padding: 1rem 3rem;
+    width: 60%;
+    padding: 1rem 2rem;
     overflow-x: hidden;
     overflow-y: auto;
 }
@@ -145,20 +145,21 @@
 }
 
 .quantity_box button {
+    /* display: block; */
     width: 2rem;
     /* height: 1.5rem; */
     transition: color 0.2s;
+    
 }
 
 .quantity_box button:hover {
-    color: #009B48;
+    background-color: #E6E5E4;
+    color: #161a1e;
 }
 
 .quantity_box button[disabled] {
     cursor: not-allowed;
 }
-
-
 
 .cart_action:hover .tooltip {
     visibility: visible;

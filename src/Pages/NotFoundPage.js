@@ -14,7 +14,7 @@ function NotFoundPage() {
                 <h2>Page Not Found</h2>
                 <p>It seems you've reached a dead-end, just like a tricky corner on a Rubik's Cube.</p>
                     <p> The page you seek is lost in the twists and turns.</p>
-                <button onClick={() => window.location.href = '/'} style={{marginRight: "50px"}}>Home</button>
+                <button onClick={() => window.location.href = '/Smart-Cube-Shop'} style={{marginRight: "50px"}}>Home</button>
                 <button onClick={handleGoBack}>Back</button>
             </div>
             <div className="not-found-image">

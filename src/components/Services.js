@@ -13,14 +13,11 @@ function Servises() {
     return (
         <>
             <section id="services" className="section">
-
                 <div className="container">
                     <div className="section_head">
                         <h3 className="heading">Our Advantages</h3>
                     </div>
-
                     <div className="wrapper services_wrapper">
-
                         {SERVISE_ITEMS.map((item, i) => (
                             <div key={i} className="services_item">
                                 <div className="services_icon">

@@ -1,23 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ProductCard from '../components/product/ProductCard';
 import "./AllProducts.css";
-import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
-
-
-
-function AllProducts({ products, onAddToCart,categories }) {
+function AllProducts({ products, categories, onAddToCart }) {
     console.log("AllProducts Page");
-    console.log("all products : ", products);
-    console.log("categoties : ", categories);
 
     const [category, setCategory] = useState("");
+    const location = useLocation();
+    const searchQuery = location.state?.searchQuery?.toLowerCase() || "";
+    console.log("Received search query:", searchQuery);
+    // console.log('Sample product:', products[0]);
+    // console.log("Filtered Products:", filteredProducts);
+    const filteredProducts = products.filter(product =>
+        (product.title && product.title.toLowerCase().includes(searchQuery)) ||
+        (product.description && product.description.toLowerCase().includes(searchQuery))
+    );
 
     
-
-
-    // --------------------------------------------------- RENDER ALL PRODUCTS COMPONENT----------------------------------------------
     return (
         <section id="all_products" className="product-section">
             <div className="container">
@@ -25,10 +25,7 @@ function AllProducts({ products, onAddToCart,categories }) {
                     {categories.map((category) => (
                         <ul key={category.id} className="nav-item">
                             <Link to="/all-products"
-                                onClick={() => {
-                                    setCategory(category.id);
-                                    // handleSearch(searchText);
-                                }}
+                                onClick={() => setCategory(category.id)}
                             >
                                 {category.name}
                             </Link>
@@ -36,20 +33,17 @@ function AllProducts({ products, onAddToCart,categories }) {
                     ))}
                 </div>
                 <div className="wrapper products_wrapper">
-                    {products.map((product) => (
+                    {filteredProducts.map((product) => (
                         <ProductCard
-                        key={product.id} 
-                        product={product} 
-                        addToCart={onAddToCart}
+                            key={product.id}
+                            product={product}
+                            addToCart={onAddToCart}
                         />
-                        
                     ))}
                 </div>
             </div>
         </section>
-
     );
-};
+}
 
 export default AllProducts;
-

@@ -2,12 +2,14 @@ import React from 'react'
 import Services from '../components/Services'
 import HeroSlider from '../components/slider/HeroSlider';
 import FeaturedSlider from '../components/slider/FeaturedSlider';
-import BrandsSlider from '../components/slider/BransSlider';
-import { TbSeparator } from 'react-icons/tb';
+import TopProducts from '../components/product/TopProducts';
+import BrandSlider from '../components/slider/BrandSlider';
 
 
-function HomePage({ products, brands }) {
+
+function HomePage({ products, onAddToCart }) {
     console.log("HomePage");
+    
     return (
         <>
             <section id="hero">
@@ -17,7 +19,7 @@ function HomePage({ products, brands }) {
             <section id="featured" className="section">
                 <div className="container">
                     <div className="section_head">
-                        <h2 className="heading">"Featured Products"</h2>
+                        <h3 className="heading" style={{fontWeight: "700", fontFamily: "Montserrat"}}>Featured Products</h3>
                     </div>
                     <FeaturedSlider products={products}/>
                 </div>
@@ -26,18 +28,19 @@ function HomePage({ products, brands }) {
             <section id="brands" className="section">
                 <div className="container">
                     <div className="section_head">
-                        <h2 className="heading">"Top Brands"</h2>
+                        <h3 className="heading" style={{fontWeight: "600"}}>Brands</h3>
                     </div>
-                    {/* <BrandsSlider brands={brands} /> */}
+                    <BrandSlider />
                 </div>
             </section>
+            <div className="separator"></div>
             <section id="products" className="section">
                 <div className="container">
                     {/* <SectionsHead heading="Top Products" /> */}
                     <div className="section_head">
-                        <h2 className="heading">"Top Products"</h2>
+                        <h3 className="heading">Top Products</h3>
                     </div>
-                    {/* <TopProducts /> */}
+                    <TopProducts products={products} onAddToCart={onAddToCart} />
                 </div>
             </section>
             <Services />

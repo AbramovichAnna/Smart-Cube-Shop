@@ -17,6 +17,7 @@ import './HeroSlider.css';
 export default function HeroSlider({ products }) {
 
     const heroProducts = products.filter(product => product.tag === 'hero-product');
+    console.log("heroProducts : ", heroProducts);
 
     return (
         <>
@@ -43,16 +44,16 @@ export default function HeroSlider({ products }) {
                             key={index}
                             className={`hero_wrapper hero_slide-${index}`}
                         >
-                            <div className="hero_item_txt" data-brand={product.brand.name}>
+                            <div className="hero_item_txt" data-brand={product.brand|| 'No Brand'}>
                                 <h3>{product.title}</h3>
                                 <h2 className="hero_price">
                                     {product.originalPrice}$ &nbsp;                      
                                 </h2>
                                 <Link to={`/product/${product.id}`} className="btn">Shop Now</Link>
                             </div>
-                            <figure className="hero_item_img">
+                            <Link to={`/product/${product.id}`} className="hero_item_img">
                                 <img src={imageUrl} alt="product-img" />
-                            </figure>
+                            </Link>
                         </SwiperSlide>
                     );
                 })}

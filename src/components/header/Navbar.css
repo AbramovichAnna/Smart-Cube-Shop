@@ -11,6 +11,7 @@
     top: 0;
     z-index: 1000;
     transition: background-color 0.3s;
+
 }
 
 
@@ -203,6 +204,9 @@
     }
 }
 
+.navbar.sticky {
+    background-color: #090a0c;
+}
 
 /* .navbar-right-section {
     padding: 20px;

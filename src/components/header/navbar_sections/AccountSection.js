@@ -105,14 +105,13 @@ function AccountSection() {
     };
 
 
-    // --------------------------------------------------- RENDER ACCOUNT SECTION COMPONENT----------------------------------------------
+    //RENDER ACCOUNT SECTION COMPONENT
     return (
         <div className="navbar-right-section" id="account">
             <div className="inner">
                 {isLoggedIn ? (
                     <div className="account-panel">
                         <h5 style={{ color: "#161a1e", fontWeight: "600" }}>Welcome back</h5> <h5 style={{ color: "#b90000", fontWeight: "700" }}>{username}</h5>
-
                         <ul>
                             <div className="separator"></div>
                             <li><Link to="/my-account">
@@ -128,7 +127,8 @@ function AccountSection() {
                         </ul>
                     </div>
                 ) : showLoginForm ? (
-                    // --------------------------------------------------- LOGIN FORM COMPONENT----------------------------------------------
+
+                    // LOGIN FORM COMPONENT
                     <div className="login-panel">
                         <h3 style={{ color: "#161a1e" }}>CUSTOMER LOGIN</h3>
                         <form onSubmit={handleSubmit} method="POST">
@@ -160,7 +160,8 @@ function AccountSection() {
                         <p>Don’t have an account? <a href="#" style={{ textDecoration: "underline" }} onClick={(e) => { e.preventDefault(); toggleForms(); }}>Signup</a></p>
                     </div>
                 ) : (
-                    // --------------------------------------------------- REGISTRATION FORM COMPONENT----------------------------------------------
+
+                    //REGISTRATION FORM COMPONENT
                     <div className="registration-panel login-panel">
                         <h3 style={{ color: "#161a1e" }}>CUSTOMER REGISTER</h3>
                         <form onSubmit={handleRegisterSubmit} method="POST">

@@ -3,27 +3,13 @@ import { FaMinus, FaPlus } from "react-icons/fa";
 import { GoTrash } from "react-icons/go";
 import { HOST_URL } from '../../common/constants.js';
 import './CartItem.css';
+import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
-function CartItem({ item,  onUpdateCartQty, onRemoveFromCart }) {
-    // console.log("CartItem data:", item);
-    const handleDecreaseQuantity = () => {
-        if (item.quantity > 1) {
-            onUpdateCartQty(item.product.id, item.quantity - 1);
-        } else {
-            onRemoveFromCart(item.product.id);
-        }
-    };
+function CartItem({ item,onIncrease, onDecrease, onRemove }) {
+    const navigate = useNavigate();
 
-    const handleIncreaseQuantity = () => {
-        if (item.quantity <= item.product.stock) {
-            onUpdateCartQty(item.product.id, item.quantity + 1);
-        }
-    };
-
-    const handleRemoveItem = () => {
-        onRemoveFromCart(item.product.id);
-    };
 
     const calculateNewPrice = (product) => {
         if (item.product.discount && item.product.discount > 0) {
@@ -37,7 +23,9 @@ function CartItem({ item,  onUpdateCartQty, onRemoveFromCart }) {
         <div className="cart_item">
             <div className="cart_item_info">
                 <figure className="cart_item_img">
+                    <Link to={`/product/${item.product.id}`}>
                     <img src={`${HOST_URL}${item.product.image}`} alt={item.product.title} />
+                    </Link>
                 </figure>
                 <div className="cart_item_head">
                     <h4 className="cart_item_title">{item.product.title}</h4>
@@ -54,16 +42,15 @@ function CartItem({ item,  onUpdateCartQty, onRemoveFromCart }) {
                 </h4>
 
                 <div className="quantity_box">
-                <button onClick={handleDecreaseQuantity}>
+                <button onClick={onDecrease}>
                         <FaMinus />
                     </button>
-                    <span className="quantity_count" style={{fontWeight: "700"}}>{item.quantity}</span>
-                    <button onClick={handleIncreaseQuantity}>
+                    <span className="quantity_count" style={{ fontWeight: "700" }}>{item.quantity}</span>
+                    <button onClick={onIncrease}>
                         <FaPlus />
                     </button>
-
                 </div>
-                <button className="btn-delete" onClick={handleRemoveItem}>
+                <button className="btn-delete" onClick={onRemove}>
                     <GoTrash />
                 </button>
             </div>

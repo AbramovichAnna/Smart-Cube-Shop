@@ -47,12 +47,6 @@
     color: #808080;
 }
 
-@media (min-width: 300px) and (max-width: 479px) {
-    .login-panel p {
-        margin-top: 60px;
-    }
-}
-
 .login-panel p a {
     color: #3b3b3b;
     text-transform: uppercase;
@@ -69,12 +63,6 @@
     flex-wrap: nowrap;
     justify-content: space-between;
     align-items: center;
-}
-
-@media (min-width: 300px) and (max-width: 479px) {
-    .checkbox {
-        margin-top: 100px;
-    }
 }
 
 .checkbox .check {
