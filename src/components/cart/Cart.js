@@ -4,7 +4,7 @@ import "./Cart.css";
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-function Cart({ cartItems, onIncrease, onDecrease, onRemove }) {
+function Cart({ cartItems, onIncrease, onDecrease, onRemove, onRemoveAll }) {
     const navigate = useNavigate();
     useEffect(() => {
         // console.log("Current cartItems:", cartItems);
@@ -100,6 +100,7 @@ function Cart({ cartItems, onIncrease, onDecrease, onRemove }) {
                                         </div>
                                     </div>
                                     <button type="button" className="btn checkout_btn" onClick={handleCheckout}>Checkout</button>
+                                    {/* <button type="button" className="btn remove_all_btn" onClick={onRemoveAll}>Remove All</button> */}
                                 </div>
                             </div>
                         </div>

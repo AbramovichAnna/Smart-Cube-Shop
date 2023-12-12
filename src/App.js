@@ -130,15 +130,15 @@ function App() {
     }
   };
 
-  const handleRemoveAll = async () => {
-    try {
-      // Remove all cart items
-      // await axios.delete(`${HOST_URL}/cart_items`);
-      setCartItems([]);
-    } catch (error) {
-      console.error('Error removing all items', error);
-    }
-  };
+  // const handleRemoveAll = async () => {
+  //   try {
+  //     // Remove all cart items
+  //     // await axios.delete(`${HOST_URL}/cart_items`);
+  //     setCartItems([]);
+  //   } catch (error) {
+  //     console.error('Error removing all items', error);
+  //   }
+  // };
 
   // --------------------------------------------------- RENDER ----------------------------------------------
   return (
@@ -146,6 +146,7 @@ function App() {
     <ScrollToTop />
       <Navbar
         cartItems={cartItems}
+        products={products}
       />
       <Routes>
         <Route path="/Smart-Cube-Shop" element={
@@ -177,7 +178,8 @@ function App() {
             cartItems={cartItems}
             onIncrease={handleIncrease}
             onDecrease={handleDecrease}
-            onRemove={handleRemove} />} />
+            onRemove={handleRemove} 
+            />} />
 
         <Route path="/checkout" element={
           <Payment

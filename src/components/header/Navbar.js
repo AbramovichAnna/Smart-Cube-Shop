@@ -20,7 +20,7 @@ const NAVBAR_ITEMS = [
     { name: "account", icon: TfiUser, closeIcon: TfiClose },
 ];
 
-function Navbar({ cartItems}) {
+function Navbar({ cartItems, products}) {
 
     const navigate = useNavigate();
     const [activeSection, setActiveSection] = useState("");
@@ -70,9 +70,6 @@ function Navbar({ cartItems}) {
     }, []);
 
 
-
-
-
     return (
         <div className="navbar">
             <Link to="/Smart-Cube-Shop" className="navbar-left">
@@ -115,6 +112,7 @@ function Navbar({ cartItems}) {
                         <SearchSection
                             setSearchQuery={setSearchQuery}
                             handleSearchSubmit={handleSearchSubmit}
+                            products={products}
                         />}
                 </div>
 

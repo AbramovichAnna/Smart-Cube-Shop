@@ -1,41 +1,79 @@
 .search-panel {
-    position: relative;
-    display: block;
-    max-width: 410px;
-    justify-self: center;
+    display: flex;
+    max-width: 410px; 
+    margin: 20px; 
+}
+
+.search-panel form {
+    display: flex;
+    width: 100%;
+    align-items: center; 
 }
 
 .search-panel input {
-    display: block;
     font-size: 14px;
-    line-height: 48px;
-    padding: 0 15px;
-    color: #363636;
-    width: 70%;
-    border: 1px solid #000;
-    margin: 20px 0px;
-    -webkit-animation: fadeInUp 0.3s both 0.1s cubic-bezier(0.26, 0.63, 0.68, 1.04);
-    animation: fadeInUp 0.3s both 0.1s cubic-bezier(0.26, 0.63, 0.68, 1.04);
+    padding: 10px 15px; /* Adjust padding as needed */
+    border: 2px solid #000; /* Solid border */
+    box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow for 3D effect */
+    border-radius: 4px; /* Rounded corners */
+    outline: none; /* Remove the default focus outline */
+    transition: border-color 0.3s, box-shadow 0.3s; /* Smooth transition for focus */
+    width: 100%; /* Full width */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
 }
 
-.search-input {
-    display: block;
-    font-size: 14px;
-    line-height: 48px;
-    padding: 0 15px;
-    color: #363636;
-    width: 100%;
-    border: 1px solid #000;
-    margin: 20px 0px;
-    animation: fadeInUp 0.3s both 0.1s cubic-bezier(0.26, 0.63, 0.68, 1.04);
+.search-panel input:focus {
+    border-color: #505050; /* Darker border on focus */
+
 }
 
 .search-submit {
-    cursor: pointer;
-    border: none;
-    background: #363636;
-    padding: 17px 80px;
-    font-size: 14px;
-    color: #fff;
+    height: 48px;
+    background-color: #333;
+    border: 1px solid #333; /* Match border width with input to ensure alignment */
+    border-radius: 0 4px 4px 0;
+    color: #fff; 
+    padding: 10px 20px;
+    font-size: 16px; 
     text-transform: uppercase;
+    line-height: 48px; 
+    white-space: nowrap;
+    margin-left: 5px;
+}
+
+.search-panel input, 
+.search-panel .search-submit {
+    margin: 5px; 
+}
+
+.search-panel input, 
+.search-panel .search-submit {
+    box-sizing: border-box; /* Include padding and borders in the width calculation */
+    line-height: normal;
+}
+
+
+
+.suggestions-list {
+    position: absolute;
+    /* background-color: #fff;
+    border: 1px solid #ddd; */
+    border-top: none;
+    list-style: none;
+    padding: 0;
+    margin-top: 50px;
+    width: 60%; /* Adjust based on parent padding */
+    box-sizing: border-box;
+    z-index: 1000; /* Ensure it's above other content */
+    color: #161a1e
+}
+
+.suggestions-list li {
+    padding: 10px 15px;
+    cursor: pointer;
+    border-bottom: 1px solid #ddd;
+}
+
+.suggestions-list li:hover {
+    background-color: #f2f2f2;
 }
