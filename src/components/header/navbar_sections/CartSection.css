@@ -1,0 +1,128 @@
+.cart-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 2rem 0;
+    background-color: #161a1e;
+    color: #fff;
+}
+.cart_item {
+    display: flex;
+    align-items: center;
+    /* background-color: #1e1e1e; */
+    color: #fff;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 3px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+}
+
+.cart_item_info {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.cart_item_img {
+    margin-right: 1rem;
+}
+
+.cart_item_img img {
+    width: 100px;
+    height: auto;
+}
+
+.cart_item_head {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* .cart_item_title {
+    font-size: 1.2rem;
+} */
+
+.cart_item_price {
+    font-size: 1.5rem;
+    color: #E6E5E4;
+    text-decoration: line-through;
+    margin-right: 1rem;
+}
+
+.quantity_box {
+    display: flex;
+    align-items: center;
+}
+
+.quantity_box button {
+    background-color: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+.quantity_count {
+    width: 3.75rem;
+    height: 2.25rem;
+    color:     #009B48;
+    font-size: 1.4rem;
+    line-height: 2.25rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+.cart_item_head button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: white;
+}
+
+.cart_item_head button:hover {
+    color: #e53935;
+}
+
+.quantity_box button:hover {
+    color: #E6E5E4;
+}
+
+::-webkit-scrollbar {
+    width: 0.5rem;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #161a1e;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: gray;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--thumb-hover-color);
+}
+
+.btn-delete {
+    font-size: 2rem;
+    background-color: transparent;
+    color: #e6e9ef;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+.products_price {
+    font-size: 1.5rem;
+    color: #E6E5E4;
+    margin-right: 1rem;
+    justify-content: baseline;
+}
+
+.btn-delete:hover {
+    color: #B90000;
+}
