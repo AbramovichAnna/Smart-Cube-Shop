@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/Smart-Cube-Shop/static/css/main.983c235e.css",
-    "main.js": "/Smart-Cube-Shop/static/js/main.8dd8cf4a.js",
+    "main.js": "/Smart-Cube-Shop/static/js/main.a9062cf7.js",
     "static/js/787.7b041ea7.chunk.js": "/Smart-Cube-Shop/static/js/787.7b041ea7.chunk.js",
     "index.html": "/Smart-Cube-Shop/index.html",
     "main.983c235e.css.map": "/Smart-Cube-Shop/static/css/main.983c235e.css.map",
-    "main.8dd8cf4a.js.map": "/Smart-Cube-Shop/static/js/main.8dd8cf4a.js.map",
+    "main.a9062cf7.js.map": "/Smart-Cube-Shop/static/js/main.a9062cf7.js.map",
     "787.7b041ea7.chunk.js.map": "/Smart-Cube-Shop/static/js/787.7b041ea7.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.983c235e.css",
-    "static/js/main.8dd8cf4a.js"
+    "static/js/main.a9062cf7.js"
   ]
 }
