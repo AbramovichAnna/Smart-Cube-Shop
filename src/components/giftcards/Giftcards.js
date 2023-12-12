@@ -10,6 +10,8 @@ function GiftCards() {
     const [giftCards, setGiftCards] = useState([]);
     const [selectedCard, setSelectedCard] = useState(null);
     const [isOpen, setIsOpen] = useState(false);
+    const [selectedCardValue, setSelectedCardValue] = useState(0);
+
 
     // Fetch cards on component mount
     useEffect(() => {
@@ -29,7 +31,6 @@ function GiftCards() {
 
     // Function to get cards from API
     const getGiftCards = () => {
-
         axios
             .get(HOST_URL + "/giftcards")
             .then((response) => {
@@ -42,16 +43,15 @@ function GiftCards() {
             });
     };
 
-
     // Handle card click
     const handleCardClick = (card, index) => {
         // If a card is already open, do nothing
         if (isOpen) return;
-
         // Otherwise, open the clicked card
         setSelectedCard({ index });
         console.log("You win :", card.value, "$");
         setIsOpen(true);
+        setSelectedCardValue(card.value);
     };
 
     return (

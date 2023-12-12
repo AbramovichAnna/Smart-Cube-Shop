@@ -20,7 +20,7 @@ function Giftcard({ flipped, onClick, giftcard }) {
                         <div className="front-content">
                             <div className="front-card">
                                 <div className="front-image">
-                                    <img src="/images/giftcard_2-bg.png" alt="Giftcard Background" className="giftcard-image" />
+                                    <img src="Smart-Cube-Shop/images/giftcard_2-bg.png" alt="Giftcard Background" className="giftcard-image" />
                                 </div>
                                 <div className="info">
                                     <div className="footer-value">

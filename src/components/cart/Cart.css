@@ -186,3 +186,12 @@
 .btn-delete:hover {
     color: #B90000;
 }
+
+.empty_cart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+}

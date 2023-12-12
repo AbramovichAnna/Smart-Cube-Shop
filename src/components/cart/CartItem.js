@@ -3,12 +3,12 @@ import { FaMinus, FaPlus } from "react-icons/fa";
 import { GoTrash } from "react-icons/go";
 import { HOST_URL } from '../../common/constants.js';
 import './CartItem.css';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 
 function CartItem({ item,onIncrease, onDecrease, onRemove }) {
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
 
     const calculateNewPrice = (product) => {
@@ -18,6 +18,7 @@ function CartItem({ item,onIncrease, onDecrease, onRemove }) {
         }
         return { newPrice: item.product.originalPrice, hasDiscount: false };
     };
+
 
     return (
         <div className="cart_item">

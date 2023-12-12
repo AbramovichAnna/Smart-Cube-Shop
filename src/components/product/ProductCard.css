@@ -61,12 +61,6 @@
     background-color: #009B48;
 }
 
-.added-to-cart {
-    background-color: green;
-    color: white;
-    /* Add other styling as needed */
-}
-
 .products_btn[disabled] {
     cursor: not-allowed;
 }
@@ -96,16 +90,7 @@
     font-weight: 600;
 }
 
-/* Responsive design for larger devices (e.g., laptops, desktops) */
-/* You need to define the breakpoint for 'lg' (e.g., 992px is a common breakpoint for 'lg') */
-@media screen and (min-width: 992px) {
-    .prod_specs ul {
-        grid-template-columns: 1fr;
-    }
-}
-
-.added-to-cart {
+.btn.products_btn.added-to-cart {
     background-color: green;
     color: white;
-    /* Add other styling as needed */
 }

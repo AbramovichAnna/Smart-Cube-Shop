@@ -2,10 +2,12 @@ import React from 'react';
 import CartItem from './CartItem';
 import "./Cart.css";
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function Cart({ cartItems, onIncrease, onDecrease, onRemove }) {
+    const navigate = useNavigate();
     useEffect(() => {
-        console.log("Current cartItems:", cartItems);
+        // console.log("Current cartItems:", cartItems);
     }, [cartItems]);
 
     // ORDER SUMMARY
@@ -32,12 +34,29 @@ function Cart({ cartItems, onIncrease, onDecrease, onRemove }) {
     };
     const orderSummary = calculateOrderSummary();
 
+
+    // HANDLE CHECKOUT
+    const isLoggedIn = !!localStorage.getItem('token');
+    const handleCheckout = () => {
+        if (!isLoggedIn) {
+            alert('Please login or register to proceed with checkout');
+        } else {
+            // Proceed with the checkout process
+            navigate('/checkout');
+            console.log('Proceeding to checkout...');
+        }
+    };
+
     return (
         <>
             <section id="cart" className="section">
                 <div className="cart-container">
                     {cartItems.length === 0 ? (
-                        <p>Your cart is empty</p>
+                        <div className="empty_cart">
+                            <h3 style={{ marginBottom: "20px", paddingBottom: "50px" }}>Your cart is empty</h3>
+                            <button className="btn btn-primary" onClick={() => window.history.back()}>Continue Shopping</button>
+                        </div>
+
                     ) : (
                         <div className="wrapper cart_wrapper">
                             <div className="cart_left_col">
@@ -80,7 +99,7 @@ function Cart({ cartItems, onIncrease, onDecrease, onRemove }) {
                                             <b>${orderSummary.newPriceTotal}</b>
                                         </div>
                                     </div>
-                                    <button type="button" className="btn checkout_btn">Checkout</button>
+                                    <button type="button" className="btn checkout_btn" onClick={handleCheckout}>Checkout</button>
                                 </div>
                             </div>
                         </div>

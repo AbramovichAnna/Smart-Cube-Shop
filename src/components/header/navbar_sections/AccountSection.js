@@ -4,25 +4,25 @@ import "./AccountSection.css";
 import { useState } from 'react';
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
-import { useNavigate } from "react-router-dom";
 import { HOST_URL } from '../../../common/constants';
-import { registerUser } from '../../../api/authApi';
 
 
 function AccountSection() {
     const token = localStorage.getItem('token');
     const username = localStorage.getItem('username');
-    const isLoggedIn = !!token;
-
-
     const [showLoginForm, setShowLoginForm] = useState(true);
-
     const [credentials, setCredentials] = useState({
+        username: '',
+        password: '',
+    });
+    const [registerCredentials, setRegisterCredentials] = useState({
         username: '',
         email: '',
         password: '',
     });
+    const isLoggedIn = !!token;
 
+    // LOGIN
     const handleChange = (e) => {
         const { name, value } = e.target;
         setCredentials({
@@ -35,81 +35,83 @@ function AccountSection() {
         e.preventDefault();
         try {
             const response = await axios.post(HOST_URL + "/token/", credentials);
-            console.log(response.data);
-
+            // console.log(response.data);
             const token = response.data.access;
-
             // Save the token to Axios defaults
             axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-
             // Save the token to local storage
             localStorage.setItem('token', token);
             let decoded = jwtDecode(token);
-
             // Save the username to local storage
             localStorage.setItem('username', credentials.username);
             const userId = localStorage.getItem('userId') || sessionStorage.getItem('userId');
-
             console.log('Login successful', response.data);
+            toggleForms();
             alert('Login succesful');
-            console.log("user", credentials.username, "logged in");
+            // console.log("user", credentials.username, "logged in");
         } catch (error) {
             console.error('Login failed', error);
         }
     };
 
-    // --------------------------------------------------- LOGOUT
+    // LOGOUT
     const handleLogout = () => {
         localStorage.clear();
         setCredentials({
             username: '',
             password: '',
         });
-        axios.defaults.headers.common['Authorization'] = '';
         console.log('Logout successful');
     };
 
-    // --------------------------------------------------- REGISTRATION
-    const [registerCredentials, setRegisterCredentials] = useState({
-        username: '',
-        email: '',
-        password: '',
-    });
 
-
-
+    // REGISTRATION
     const handleRegisterChange = (e) => {
         const { name, value } = e.target;
         setRegisterCredentials({
             ...registerCredentials,
             [name]: value,
         });
+        // console.log(registerCredentials);
     };
 
     const handleRegisterSubmit = async (event) => {
         event.preventDefault();
         try {
-            const userData = { ...registerCredentials };
-            const response = await registerUser(userData);
-            // Handle the response - maybe log in the user or redirect to a login page
+            const response = await axios.post(`${HOST_URL}/register/`, registerCredentials);
+            console.log('Registration successful', response.data);
+            alert('Registration successful');
+            setShowLoginForm(true);
         } catch (error) {
-            // Handle registration errors - display error messages to the user
+            console.error('Registration failed', error);
+            alert('Registration failed');
         }
     };
 
-
-
-
+    // TOGGLE FORMS
     const toggleForms = () => {
         setShowLoginForm(!showLoginForm);
     };
 
+    const fetchCart = async () => {
+        try {
+            const response = await axios.get(`${HOST_URL}/cart_items/`, {
+                headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+            });
+        } catch (error) {
+            console.error('Error fetching cart', error);
+        }
+    };
 
-    //RENDER ACCOUNT SECTION COMPONENT
+    if (localStorage.getItem('token')) {
+        fetchCart();
+    }
+
     return (
         <div className="navbar-right-section" id="account">
             <div className="inner">
                 {isLoggedIn ? (
+                    // ACCOUNT PANEL COMPONENT
                     <div className="account-panel">
                         <h5 style={{ color: "#161a1e", fontWeight: "600" }}>Welcome back</h5> <h5 style={{ color: "#b90000", fontWeight: "700" }}>{username}</h5>
                         <ul>
@@ -154,7 +156,7 @@ function AccountSection() {
                                     <div className="box"></div>
                                 </label>
                                 <span>Remember Me</span>
-                                <button className="btn btn-submit" type="submit">Login</button>
+                                <button className="btn btn-submit" type="submit" >Login</button>
                             </div>
                         </form>
                         <p>Don’t have an account? <a href="#" style={{ textDecoration: "underline" }} onClick={(e) => { e.preventDefault(); toggleForms(); }}>Signup</a></p>
@@ -165,13 +167,14 @@ function AccountSection() {
                     <div className="registration-panel login-panel">
                         <h3 style={{ color: "#161a1e" }}>CUSTOMER REGISTER</h3>
                         <form onSubmit={handleRegisterSubmit} method="POST">
-                            <input type="text"
-                                id="reg-username"
+                            <input
+                                type="text"
                                 name="username"
                                 value={registerCredentials.username}
                                 onChange={handleRegisterChange}
                                 required
-                                placeholder="Username" />
+                                placeholder="Username"
+                            />
                             <input type="email"
                                 id="reg-email"
                                 name="email"
@@ -187,7 +190,7 @@ function AccountSection() {
                                 required
                                 placeholder="Password" />
 
-                            <button className="btn btn-submit" type="submit" onClick={(e) => { e.preventDefault(); toggleForms(); }}>Register</button>
+                            <button className="btn btn-submit" type="submit">Register</button>
                         </form>
                         <p>Already have an account? <a href='#' style={{ textDecoration: "underline" }} onClick={(e) => { e.preventDefault(); toggleForms(); }}>Login</a></p>
                     </div>

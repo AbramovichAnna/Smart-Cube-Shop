@@ -19,7 +19,7 @@ function NotFoundPage() {
             </div>
             <div className="not-found-image">
                 <span className="faded faded-all">
-                    <img src="images/nopage-bg.png" alt="404" />
+                    <img src="Smart-Cube-Shop/images/nopage-bg.png" alt="404" />
                 </span>
             </div>
         </div>

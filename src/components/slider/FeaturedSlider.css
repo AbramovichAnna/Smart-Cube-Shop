@@ -7,27 +7,19 @@
     overflow: hidden;
 }
 
-
-@media (max-width: 768px) {
-    .featured_slides {
-        width: 20rem;
-    }
-}
-
 .featured_swiper {
-    padding-top: 3rem !important; 
+    padding-top: 2rem !important; 
     padding-bottom: 5rem !important;
 }
 
 .featured_img {
-    height: 10rem;
+    /* height: 15rem; */
     margin-top: 1rem;
-    overflow: hidden;
 }
 
 .featured_img img {
     margin-top: 5px;
-    width: 75%;
+    width: 65%;
     object-fit: cover; 
 }
 
@@ -36,12 +28,10 @@
     width: 100%;
     justify-content: center;
     align-items: center;
-    /* margin-top: 1rem; */
     cursor: pointer;
     transition: all 0.3s ease-in-out;
     margin-bottom: 1rem;
 }
-
 
 .swiper-wrapper {
     margin-bottom: 50px;

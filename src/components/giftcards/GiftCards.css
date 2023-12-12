@@ -3,6 +3,11 @@
     flex-wrap: wrap;
     width: 1250px;
     padding-bottom: 50px;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 auto;
+    margin-top: 10px;
+
 }
 
 .front-card {

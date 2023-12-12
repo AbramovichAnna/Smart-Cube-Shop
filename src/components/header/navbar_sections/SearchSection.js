@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './AccountSection.css'; // Assuming the styles are in this CSS file
+import './AccountSection.css'; 
 
 function SearchSection({ setSearchQuery, handleSearchSubmit }) {
 
@@ -16,7 +16,7 @@ function SearchSection({ setSearchQuery, handleSearchSubmit }) {
     };
 
     return (
-        <div className="login-panel"> {/* Reuse the login-panel class */}
+        <div className="login-panel search-panel"> {/* Reuse the login-panel class */}
             <form onSubmit={onSearchSubmit}>
                 <input
                     type="text"
@@ -25,7 +25,7 @@ function SearchSection({ setSearchQuery, handleSearchSubmit }) {
                     onChange={onSearchChange}
                     className="search-panel input" 
                 />
-                <button type="submit" className="btn btn-submit">Search</button> {/* Apply the button style */}
+                <button type="submit" className="btn btn-submit">Search</button>
             </form>
         </div>
     );

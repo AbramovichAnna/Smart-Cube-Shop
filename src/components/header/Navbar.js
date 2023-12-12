@@ -4,7 +4,6 @@ import { BsBasket } from 'react-icons/bs';
 import { TfiClose, TfiGift, TfiSearch, TfiUser, TfiHome } from 'react-icons/tfi';
 import { BsShop } from "react-icons/bs";
 import AccountSection from './navbar_sections/AccountSection';
-import CartSection from './navbar_sections/CartSection';
 import SearchSection from './navbar_sections/SearchSection';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
@@ -21,20 +20,17 @@ const NAVBAR_ITEMS = [
     { name: "account", icon: TfiUser, closeIcon: TfiClose },
 ];
 
-function Navbar({ cartItems, onIncrease, onDecrease, onRemove }) {
+function Navbar({ cartItems}) {
 
     const navigate = useNavigate();
     const [activeSection, setActiveSection] = useState("");
     const [searchQuery, setSearchQuery] = useState("");
+    const cartItemsCount = cartItems.reduce((total, item) => total + item.quantity, 0);
 
     // HANDLE SEARCH SUBMIT
     const handleSearchSubmit = () => {
         navigate('/all-products', { state: { searchQuery } });
     };
-
-    useEffect(() => {
-        setSearchQuery('');
-    }, []);
 
     // TOGGLE NAVBAR SECTIONS
     const handleToggle = (section) => {
@@ -49,6 +45,10 @@ function Navbar({ cartItems, onIncrease, onDecrease, onRemove }) {
             navigate('/Smart-Cube-Shop');
             return;
         }
+        else if (section === "cart") {
+            navigate('/cart');
+            return;
+        }
         setActiveSection((prevSection) => (prevSection === section ? "" : section));
     };
 
@@ -56,7 +56,7 @@ function Navbar({ cartItems, onIncrease, onDecrease, onRemove }) {
     useEffect(() => {
         const handleScroll = () => {
             const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 50) { 
+            if (window.scrollY > 50) {
                 navbar.classList.add('sticky');
             } else {
                 navbar.classList.remove('sticky');
@@ -70,11 +70,14 @@ function Navbar({ cartItems, onIncrease, onDecrease, onRemove }) {
     }, []);
 
 
+
+
+
     return (
         <div className="navbar">
             <Link to="/Smart-Cube-Shop" className="navbar-left">
                 <div className="navbar-logo">
-                    <img src="/images/logo_2.png" alt="logo-2" />
+                    <img src="Smart-Cube-Shop/images/logo_2.png" alt="logo_2" />
                 </div>
                 <div className="logo-text">
                     <h3>Smart Cube</h3>
@@ -91,25 +94,22 @@ function Navbar({ cartItems, onIncrease, onDecrease, onRemove }) {
                             onClick={() => handleToggle(item.name)}
                             className={`navbar-right-toggle ${activeSection === item.name ? "active" : ""}`}
                         >
-                            <>
+                            <div className="icon-container">
                                 {activeSection === item.name ? <item.closeIcon /> : <item.icon />}
-                                <h6 className="icon-text">{item.name}</h6>
-                            </>
-
+                                {item.name === "cart" && cartItemsCount > 0 && (
+                                    <span className="cart-item-count">
+                                        {cartItemsCount}
+                                    </span>
+                                )}
+                            </div>
+                            <h6 className="icon-text">{item.name}</h6>
                         </div>
                     ))}
                 </div>
                 <div className={`navbar-right-dropdown ${activeSection ? "active" : ""}`}>
-                    {activeSection === "account" && 
-                    <AccountSection 
-                    setActiveSection={setActiveSection} 
-                    />}
-                    {activeSection === "cart" &&
-                        <CartSection
-                            cartItems={cartItems}
-                            onIncrease={onIncrease}
-                            onDecrease={onDecrease}
-                            onRemove={onRemove}
+                    {activeSection === "account" &&
+                        <AccountSection
+                            setActiveSection={setActiveSection}
                         />}
                     {activeSection === "search" &&
                         <SearchSection

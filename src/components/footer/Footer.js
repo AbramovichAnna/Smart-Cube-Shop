@@ -2,6 +2,7 @@ import React from 'react';
 import "./Footer.css";
 import { FaLinkedin, FaGithub } from "react-icons/fa";
 import { Link } from 'react-router-dom';
+import ScrollToTopButton from './ScrollToTopButton';
 
 function Footer() {
     const currentYear = new Date().getFullYear();
@@ -24,13 +25,13 @@ function Footer() {
                 <div className="container">
                     <Link to="/" className="logo-center">
                         <div className="navbar-logo">
-                            <img src="images/logo_2.png" alt="logo" />
+                            <img src="Smart-Cube-Shop/images/logo_2.png" alt="logo" />
                         </div>
                         <div className="logo-text">
                             <h3>Smart Cube</h3>
                         </div>
                     </Link>
-
+                    <ScrollToTopButton />
                     <div className="footer-content">
                         <div className="useful-links">
                             <h5>Useful Links</h5>
@@ -43,8 +44,8 @@ function Footer() {
 
                         <div className="social-links">
                             <div className="foot_social_links social_links">
-                                <FaLinkedin className="footer-icon" href='/'/>
-                                <FaGithub className="footer-icon" href='https://github.com/AbramovichAnna/Smart-Cube-Shop'/>
+                            <Link to="https://www.linkedin.com/in/anna-abramovich-545b56274/"><FaLinkedin className="footer-icon" /></Link>
+                                <Link to="https://github.com/AbramovichAnna?tab=repositories"><FaGithub className="footer-icon" /></Link>
                             </div>
                             <div className="foot_vr_line"></div>
 

@@ -9,7 +9,7 @@ function ProductCard({ product, addToCart }) {
     const imageUrl = `${HOST_URL}${product.image}`;
     const navigate = useNavigate();
 
-    console.log("product : ", product);
+    // console.log("product : ", product);
 
     if (!product) {
         return <div>Loading...</div>;

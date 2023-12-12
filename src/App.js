@@ -3,22 +3,23 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import axios from "axios";
 import HomePage from "./Pages/HomePage";
 import Navbar from "./components/header/Navbar";
-import AllProducts from "./Pages/AllProducts";
+import AllProducts from "./components/product/AllProducts.js";
 import NotFoundPage from "./Pages/NotFoundPage";
 import Footer from "./components/footer/Footer";
 import GiftCards from "./components/giftcards/Giftcards";
-import Login from "./components/Login";
 import ProductDetails from "./components/product/ProductDetails";
 import Cart from "./components/cart/Cart";
 import './App.css';
 import { HOST_URL } from './common/constants.js';
+import ScrollToTop from './common/ScrollToTop.js';
+import Payment from './components/cart/Payment.js';
+
 
 function App() {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [cartItems, setCartItems] = useState([]);
-  const [cartId, setCartId] = useState(null); // cartId is null by default
-  const [brands, setBrands] = useState([]); // brands is an empty array by default
+
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -30,7 +31,6 @@ function App() {
           axios.get(`${HOST_URL}/products`),
           axios.get(`${HOST_URL}/categories`),
           axios.get(`${HOST_URL}/cart_items`),
-          axios.get(`${HOST_URL}/brands`),
         ]);
 
         setProducts(productsResponse.data);
@@ -48,11 +48,9 @@ function App() {
     fetchAllData();
   }, []);
 
-  console.log('products', products);
-  console.log('categories', categories);
-  console.log('cartItems', cartItems);
-  console.log('cartId', cartId);
-  console.log('brands', brands);
+  // console.log('products', products);
+  // console.log('categories', categories);
+  // console.log('cartItems', cartItems);
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -134,7 +132,7 @@ function App() {
 
   const handleRemoveAll = async () => {
     try {
-      // Remove all items from the backend
+      // Remove all cart items
       // await axios.delete(`${HOST_URL}/cart_items`);
       setCartItems([]);
     } catch (error) {
@@ -142,15 +140,12 @@ function App() {
     }
   };
 
-
   // --------------------------------------------------- RENDER ----------------------------------------------
   return (
     <BrowserRouter>
+    <ScrollToTop />
       <Navbar
         cartItems={cartItems}
-        onIncrease={handleIncrease}
-        onDecrease={handleDecrease}
-        onRemove={handleRemove}
       />
       <Routes>
         <Route path="/Smart-Cube-Shop" element={
@@ -175,7 +170,7 @@ function App() {
 
         <Route path="/gift-cards" element={<GiftCards />} />
 
-        <Route path="/login" element={<Login />} />
+        {/* <Route path="/login" element={<Login />} /> */}
 
         <Route path="/cart" element={
           <Cart
@@ -183,6 +178,11 @@ function App() {
             onIncrease={handleIncrease}
             onDecrease={handleDecrease}
             onRemove={handleRemove} />} />
+
+        <Route path="/checkout" element={
+          <Payment
+            cartItems={cartItems}
+          />} />
 
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

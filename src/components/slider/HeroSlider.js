@@ -17,7 +17,7 @@ import './HeroSlider.css';
 export default function HeroSlider({ products }) {
 
     const heroProducts = products.filter(product => product.tag === 'hero-product');
-    console.log("heroProducts : ", heroProducts);
+    // console.log("heroProducts : ", heroProducts);
 
     return (
         <>

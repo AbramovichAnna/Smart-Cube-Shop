@@ -8,7 +8,7 @@ import BrandSlider from '../components/slider/BrandSlider';
 
 
 function HomePage({ products, onAddToCart }) {
-    console.log("HomePage");
+    console.log("Welcome to Smart Cube Shop");
     
     return (
         <>
@@ -28,7 +28,7 @@ function HomePage({ products, onAddToCart }) {
             <section id="brands" className="section">
                 <div className="container">
                     <div className="section_head">
-                        <h3 className="heading" style={{fontWeight: "600"}}>Brands</h3>
+                        <h3 className="heading" style={{fontWeight: "700", fontFamily: "Montserrat"}}>Brands</h3>
                     </div>
                     <BrandSlider />
                 </div>
@@ -38,7 +38,7 @@ function HomePage({ products, onAddToCart }) {
                 <div className="container">
                     {/* <SectionsHead heading="Top Products" /> */}
                     <div className="section_head">
-                        <h3 className="heading">Top Products</h3>
+                        <h3 className="heading" style={{fontWeight: "700", fontFamily: "Montserrat"}}>Top Products</h3>
                     </div>
                     <TopProducts products={products} onAddToCart={onAddToCart} />
                 </div>
