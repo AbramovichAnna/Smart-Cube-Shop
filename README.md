@@ -36,36 +36,27 @@ Before you begin, ensure you have the following software installed on your syste
 
    ```bash
    git clone https://github.com/your-username/smart-cube-shop.git
-Navigate to the project directory:
-
-bash
-Copy code
+2. Navigate to the project directory:
 cd smart-cube-shop
-Install the project dependencies using npm:
 
-bash
-Copy code
+3. Install the project dependencies using npm:
 npm install
-Running the App
+
+4. Running the App
 After the installation is complete, you can start the development server:
 
-bash
-Copy code
 npm start
+
 The Smart Cube Shop app will be available in your web browser at http://localhost:3000. You can access and explore the app from there.
 
-Building for Production
+5. Building for Production
 To build the Smart Cube Shop app for production deployment, use the following command:
 
-bash
-Copy code
 npm run build
 This will create an optimized build of the app in the build directory, ready for hosting on a web server.
 
-Contributing
+##Contributing
 We welcome contributions from the community to make Smart Cube Shop even better. Please see our Contributing Guidelines for more information on how to get involved.
 
-License
-Smart Cube Shop is licensed under the MIT License. See the LICENSE file for details.
 
 Happy cubing and shopping at Smart Cube Shop!
