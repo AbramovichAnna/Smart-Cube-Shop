@@ -9,8 +9,6 @@ Welcome to Smart Cube Shop, your one-stop destination for all things Rubik's Cub
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
   - [Running the App](#running-the-app)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Features
 
@@ -36,27 +34,27 @@ Before you begin, ensure you have the following software installed on your syste
 
    ```bash
    git clone https://github.com/your-username/smart-cube-shop.git
+   
 2. Navigate to the project directory:
+   
 cd smart-cube-shop
 
-3. Install the project dependencies using npm:
+4. Install the project dependencies using npm:
+
 npm install
 
-4. Running the App
+## Running the App
 After the installation is complete, you can start the development server:
 
 npm start
 
 The Smart Cube Shop app will be available in your web browser at http://localhost:3000. You can access and explore the app from there.
 
-5. Building for Production
+1. Building for Production
 To build the Smart Cube Shop app for production deployment, use the following command:
 
 npm run build
 This will create an optimized build of the app in the build directory, ready for hosting on a web server.
 
-##Contributing
-We welcome contributions from the community to make Smart Cube Shop even better. Please see our Contributing Guidelines for more information on how to get involved.
 
-
-Happy cubing and shopping at Smart Cube Shop!
+Happy cubing at Smart Cube Shop!
