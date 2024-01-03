@@ -1,5 +1,7 @@
 # Smart Cube Shop
 
+https://abramovichanna.github.io/Smart-Cube-Shop/
+
 Welcome to Smart Cube Shop, your one-stop destination for all things Rubik's Cubes and magic cubes. Dive into the world of twisty puzzles, where both seasoned solvers and curious beginners can find the perfect cube for their needs. Explore our virtual store filled with a mesmerizing array of cubes, each one a unique enigma to unravel. From lightning-fast speedcubes that defy gravity to artisanal, limited-edition puzzles, Smart Cube Shop has your cube cravings covered. Join our passionate cubing community, shop now, and embark on a journey filled with twists, turns, and magic!
 
 ## Table of Contents
