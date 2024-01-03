@@ -1,6 +1,9 @@
 # Smart Cube Shop app
 https://abramovichanna.github.io/Smart-Cube-Shop/
 
+Step into a world of endless fascination at our e-commerce wonderland, dedicated to the art of cube-solving. Whether you're a seasoned solver or a curious beginner, we have the perfect Rubik's Cubes and magic cubes waiting for you. Dive into our virtual store to discover a mesmerizing array of cubes, each one a unique enigma to unravel. From speedcubes that defy gravity to artisanal, limited-edition puzzles, we've got your cube cravings covered. Join our passionate cubing community, shop now, and embark on a journey filled with twists, turns, and magic!"
+
+How to setup:
 npm start
 Runs the app in the development mode.
 Open http://localhost:3000 to view it in your browser.
