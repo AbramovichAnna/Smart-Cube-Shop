@@ -50,12 +50,4 @@ npm start
 ```
 The Smart Cube Shop app will be available in your web browser at http://localhost:3000. You can access and explore the app from there.
 
-1. Building for Production
-To build the Smart Cube Shop app for production deployment, use the following command:
-```bash
-npm run build
-```
-This will create an optimized build of the app in the build directory, ready for hosting on a web server.
-
-
 Happy cubing at Smart Cube Shop!
