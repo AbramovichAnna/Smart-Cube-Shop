@@ -50,7 +50,7 @@ Before you begin, ensure you have the following software installed on your syste
    ```
    
 ## Running the App
-After the installation is complete, you can start the development server:
+  After the installation is complete, you can start the development server:
    ```bash
    npm start
    ```
