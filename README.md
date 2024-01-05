@@ -1,6 +1,6 @@
 # Smart Cube Shop
 
-**Visit the Live Site**: [SmartCubeShop]([https://dreamscapes.onrender.com/](https://abramovichanna.github.io/Smart-Cube-Shop/)
+**Visit the Live Site**: [SmartCubeShop]([https://dreamscapes.onrender.com/](https://abramovichanna.github.io/Smart-Cube-Shop/))
 
 **Visit the Live Site**: [DreamScapes](https://dreamscapes.onrender.com/)
 
