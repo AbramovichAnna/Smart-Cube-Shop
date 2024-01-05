@@ -4,7 +4,7 @@
 
 ## Description
 
-Welcome to Smart Cube Shop, your ideal destination for Rubik's Cubes and magic cubes. Perfect for both expert solvers and beginners, our store offers a diverse range of speedcubes and exclusive puzzles. Dive into a thrilling world of twists and turns, and discover your next cubing challenge with us. Shop today and embark on an exciting cubing journey!
+Explore the fascinating world of Rubik's Cubes with Smart Cube Shop, a dynamic app created using React and Django RF. Designed for both experienced cubers and newcomers, this virtual store showcases a diverse collection of puzzles, from agile speedcubes to exclusive limited editions. Ideal for practice and exploration, Smart Cube Shop offers a unique platform to satisfy your cubing curiosity. Start your twisty puzzle adventure here!
 
 ## Table of Contents
 
