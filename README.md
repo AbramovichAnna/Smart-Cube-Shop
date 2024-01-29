@@ -1,7 +1,7 @@
 # Smart Cube Shop
 
 **Visit the Live Site**: [SmartCubeShop](https://abramovichanna.github.io/Smart-Cube-Shop/)
-![Example GIF](demo.gif)
+![Example GIF](86914f0a-e3a3-4782-9b52-97dd2b0b0b2d.gif)
 
 
 ## Description
