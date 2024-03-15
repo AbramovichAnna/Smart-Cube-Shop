@@ -22,7 +22,7 @@
   "homepage": "https://abramovichanna.github.io/Smart-Cube-Shop/",
   "scripts": {
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "deploy": "gh-pages -d build --repo https://github.com/AbramovichAnna/Smart-Cube-Shop.git",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
