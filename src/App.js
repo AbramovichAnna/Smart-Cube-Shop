@@ -6,7 +6,7 @@ import Navbar from "./components/header/Navbar";
 import AllProducts from "./components/product/AllProducts.js";
 import NotFoundPage from "./Pages/NotFoundPage";
 import Footer from "./components/footer/Footer";
-import GiftCards from "./components/giftcards/Giftcards";
+import Loader from "./components/loader/Loader";
 import ProductDetails from "./components/product/ProductDetails";
 import Cart from "./components/cart/Cart";
 import './App.css';
@@ -21,6 +21,7 @@ function App() {
   const [cartItems, setCartItems] = useState([]);
 
   const [isLoading, setIsLoading] = useState(true);
+  const [minimumLoadingTimeMet, setMinimumLoadingTimeMet] = useState(false);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -46,14 +47,20 @@ function App() {
     };
 
     fetchAllData();
+    const timer = setTimeout(() => {
+      setMinimumLoadingTimeMet(true);
+    }, 2000);
+
+    // Clean up the timer when the component unmounts
+    return () => clearTimeout(timer);
   }, []);
 
   // console.log('products', products);
   // console.log('categories', categories);
   // console.log('cartItems', cartItems);
 
-  if (isLoading) {
-    return <div>Loading...</div>;
+  if (isLoading || !minimumLoadingTimeMet) {
+    return <Loader />;
   }
   if (error) {
     return <div>Error: {error}</div>;
@@ -130,20 +137,11 @@ function App() {
     }
   };
 
-  // const handleRemoveAll = async () => {
-  //   try {
-  //     // Remove all cart items
-  //     // await axios.delete(`${HOST_URL}/cart_items`);
-  //     setCartItems([]);
-  //   } catch (error) {
-  //     console.error('Error removing all items', error);
-  //   }
-  // };
 
   // --------------------------------------------------- RENDER ----------------------------------------------
   return (
     <BrowserRouter>
-    <ScrollToTop />
+      <ScrollToTop />
       <Navbar
         cartItems={cartItems}
         products={products}
@@ -169,17 +167,13 @@ function App() {
             products={products} />}
         />
 
-        <Route path="/gift-cards" element={<GiftCards />} />
-
-        {/* <Route path="/login" element={<Login />} /> */}
-
         <Route path="/cart" element={
           <Cart
             cartItems={cartItems}
             onIncrease={handleIncrease}
             onDecrease={handleDecrease}
-            onRemove={handleRemove} 
-            />} />
+            onRemove={handleRemove}
+          />} />
 
         <Route path="/checkout" element={
           <Payment

@@ -1,79 +1,81 @@
+.search-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    background-color: rgba(0, 0, 0, 0.65); /* semi-transparent background */
+    z-index: 2000; 
+    padding-top: 50px; 
+}
+
 .search-panel {
-    display: flex;
-    max-width: 410px; 
-    margin: 20px; 
-}
-
-.search-panel form {
-    display: flex;
+    position: relative;
+    max-width: 600px; 
     width: 100%;
-    align-items: center; 
+    background-color: #1C1C1C; /* Dark gray background */
+    border-radius: 5px; /* Rounded corners for the panel */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3); /* Add some shadow for depth */
+    z-index: 10; 
+}
+.search-panel form {
+    position: relative; 
 }
 
-.search-panel input {
-    font-size: 14px;
-    padding: 10px 15px; /* Adjust padding as needed */
-    border: 2px solid #000; /* Solid border */
-    box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow for 3D effect */
-    border-radius: 4px; /* Rounded corners */
-    outline: none; /* Remove the default focus outline */
-    transition: border-color 0.3s, box-shadow 0.3s; /* Smooth transition for focus */
-    width: 100%; /* Full width */
-    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+.search-close-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 20px;
+    color: #FFFFFF; /* White color for the icon */
 }
 
-.search-panel input:focus {
-    border-color: #505050; /* Darker border on focus */
-
-}
-
-.search-submit {
-    height: 48px;
-    background-color: #333;
-    border: 1px solid #333; /* Match border width with input to ensure alignment */
-    border-radius: 0 4px 4px 0;
-    color: #fff; 
-    padding: 10px 20px;
+.search-input {
+    width: 100%;
+    padding: 10px 15px;
     font-size: 16px; 
-    text-transform: uppercase;
-    line-height: 48px; 
-    white-space: nowrap;
-    margin-left: 5px;
+    border: none; /* Remove border */
+    border-radius: 4px; 
+    margin: 0;
+    color: #FFFFFF; /* White text color */
+    background-color: #161a1e; /* Slightly lighter gray for the input */
 }
 
-.search-panel input, 
-.search-panel .search-submit {
-    margin: 5px; 
+.btn.search-submit {
+    display: none; 
 }
-
-.search-panel input, 
-.search-panel .search-submit {
-    box-sizing: border-box; /* Include padding and borders in the width calculation */
-    line-height: normal;
-}
-
-
 
 .suggestions-list {
     position: absolute;
-    /* background-color: #fff;
-    border: 1px solid #ddd; */
-    border-top: none;
+    top: 100%; 
+    left: 0;
+    right: 0;
+    background-color: #2C2C2C; /* Slightly lighter gray for suggestions */
+    color: #FFFFFF; /* White text color for suggestions */
+    border: none; /* Remove border for suggestions */
     list-style: none;
     padding: 0;
-    margin-top: 50px;
-    width: 60%; /* Adjust based on parent padding */
-    box-sizing: border-box;
-    z-index: 1000; /* Ensure it's above other content */
-    color: #161a1e
+    margin: 0;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.5); /* Stronger shadow for depth */
+    z-index: 1000; 
+    border-radius: 0 0 5px 5px; /* Rounded corners for the bottom of suggestions */
 }
 
 .suggestions-list li {
     padding: 10px 15px;
     cursor: pointer;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #3D3D3D; /* Darker line for separation */
+}
+
+.suggestions-list li:last-child {
+    border-bottom: none; 
 }
 
 .suggestions-list li:hover {
-    background-color: #f2f2f2;
+    background-color: #3D3D3D; /* Darker gray for hover */
 }

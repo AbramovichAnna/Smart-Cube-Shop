@@ -3,8 +3,7 @@ import Cards from 'react-credit-cards-2';
 import 'react-credit-cards-2/dist/es/styles-compiled.css';
 import './Payment.css';
 
-const Payment = ({ total }) => { // Add the total prop here
-    // ... existing useSta) => {
+const Payment = ({ total }) => {
     const [state, setState] = useState({
         number: '',
         expiry: '',
@@ -24,8 +23,7 @@ const Payment = ({ total }) => { // Add the total prop here
 
     const handleSubmit = (evt) => {
         evt.preventDefault();
-        // Here you would handle the form submission, payment processing, etc.
-        console.log('Processing payment for:', total); // Use the total prop here
+        console.log('Processing payment for:', total); 
     }
 
 

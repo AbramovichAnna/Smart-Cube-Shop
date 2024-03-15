@@ -3,13 +3,10 @@ import { FaMinus, FaPlus } from "react-icons/fa";
 import { GoTrash } from "react-icons/go";
 import { HOST_URL } from '../../common/constants.js';
 import './CartItem.css';
-// import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 
-function CartItem({ item,onIncrease, onDecrease, onRemove }) {
-    // const navigate = useNavigate();
-
+function CartItem({ item, onIncrease, onDecrease, onRemove }) {
 
     const calculateNewPrice = (product) => {
         if (item.product.discount && item.product.discount > 0) {
@@ -25,7 +22,7 @@ function CartItem({ item,onIncrease, onDecrease, onRemove }) {
             <div className="cart_item_info">
                 <figure className="cart_item_img">
                     <Link to={`/product/${item.product.id}`}>
-                    <img src={`${HOST_URL}${item.product.image}`} alt={item.product.title} />
+                        <img src={`${HOST_URL}${item.product.image}`} alt={item.product.title} />
                     </Link>
                 </figure>
                 <div className="cart_item_head">
@@ -43,7 +40,7 @@ function CartItem({ item,onIncrease, onDecrease, onRemove }) {
                 </h4>
 
                 <div className="quantity_box">
-                <button onClick={onDecrease}>
+                    <button onClick={onDecrease}>
                         <FaMinus />
                     </button>
                     <span className="quantity_count" style={{ fontWeight: "700" }}>{item.quantity}</span>

@@ -8,8 +8,6 @@
     flex-direction: column;
     grid-template-columns: auto 1fr;
     gap: 3rem;
-    /* padding-top: 3rem; */
-    /* padding-bottom: 3rem; */
 }
 
 .cart_wrapper {
@@ -21,7 +19,6 @@
 
 .cart_item_img {
     width: 100px;
-    /* height: auto; */
 }
 
 .cart_item_img img {

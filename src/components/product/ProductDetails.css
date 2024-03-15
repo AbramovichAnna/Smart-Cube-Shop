@@ -3,22 +3,18 @@
   }
   
   .prod_details_wrapper {
-    display: flex; /* Use Flexbox instead of Grid */
+    display: flex; 
     flex-direction: row;
-    justify-content: space-between; /* Space out the children elements */
-    align-items: start; /* Align items at the start of the cross axis */
-    gap: 2rem; /* Spacing between the image and details */
-    max-width: 1200px; /* Adjust the max-width as needed */
-    margin: 0 auto; /* Center the content */
+    justify-content: space-between; 
+    align-items: start; 
+    gap: 2rem; 
+    max-width: 1200px; 
+    margin: 0 auto; 
 }
 .prod_details_left_col, .prod_details_right_col {
-  flex: 1; /* This will allow both children to take equal space */
+  flex: 1; 
 }  
-  /* .prod_details_left_col {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  } */
+
   
   .prod_details_tabs {
     display: grid;
@@ -48,22 +44,21 @@
     object-fit: cover;
   }
   
-  .prod_details_right_col .separator {
+  /* .prod_details_right_col .separator {
     margin-top: 2.2rem;
     margin-bottom: 2.2rem;
-  }
+  } */
   
   .prod_details_info {
     margin-top: 0.6rem;
     margin-bottom: 1.2rem;
-    /* font-weight: 600; */
   }
   
-  .prod_details_ratings {
+  /* .prod_details_ratings {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-  }
+  } */
   
   .prod_details_ratings a {
     opacity: 0.8;

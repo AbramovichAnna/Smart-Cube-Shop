@@ -1,76 +1,96 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { IoClose } from 'react-icons/io5';
 import './SearchSection.css';
-import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
 
-function SearchSection({ setSearchQuery, handleSearchSubmit, products }) {
-    const [localSearchQuery, setLocalSearchQuery] = useState("");
+function SearchSection({ products }) {
+    const [inputValue, setInputValue] = useState("");
     const [suggestions, setSuggestions] = useState([]);
-    const location = useLocation();
+    const [showSearch, setShowSearch] = useState(true);
+    const navigate = useNavigate();
+    const searchPanelRef = useRef(null);
 
+    const getSuggestions = useCallback((value) => {
+        return value.length > 0
+            ? products.filter(product =>
+                product.title.toLowerCase().includes(value.toLowerCase())
+            ).map(product => ({ id: product.id, title: product.title }))
+            : [];
+    }, [products]);
 
-    // Function to filter suggestions based on the input value
-    const getSuggestions = (value) => {
-        if (!value) {
-            return [];
-        }
-        // Filter the products to get suggestions based on the product title
-        return products.filter(product =>
-            product.title.toLowerCase().includes(value.toLowerCase())
-        ).map(product => product.title);
-    };
+    const handleInputChange = useCallback(({ target: { value } }) => {
+        setInputValue(value);
+        setSuggestions(getSuggestions(value));
+    }, [getSuggestions]);
 
-    // Handler for search input change
-    const onSearchChange = (e) => {
-        const value = e.target.value;
-        setLocalSearchQuery(value);
-        if (value.length > 1) {
-            setSuggestions(getSuggestions(value));
-        } else {
-            setSuggestions([]);
-        }
-    };
+    const navigateToProductPageById = useCallback((id) => {
+        setInputValue(''); // Clear the input
+        setSuggestions([]); // Clear suggestions
+        setShowSearch(false); // Hide search
+        navigate(`/product/${id}`);
+    }, [navigate]);
 
-    // Handler for search submission
-    const onSearchSubmit = (e) => {
+    const handleSuggestionClick = useCallback((id) => {
+        navigateToProductPageById(id);
+    }, [navigateToProductPageById]);
+
+    const handleSubmit = useCallback((e) => {
         e.preventDefault();
-        setSearchQuery(localSearchQuery);
-        handleSearchSubmit(localSearchQuery);
+        if (suggestions.length > 0) {
+            navigateToProductPageById(suggestions[0].id);
+        }
+    }, [suggestions, navigateToProductPageById]);
+
+    const closeSearch = useCallback(() => {
+        setInputValue('');
         setSuggestions([]);
-    };
+        setShowSearch(false);
+    }, []);
 
-    // Handler for suggestion clicked
-    const onSuggestionClicked = (suggestion) => {
-        setLocalSearchQuery(suggestion);
-        setSearchQuery(suggestion);
-        handleSearchSubmit(suggestion);
-        setSuggestions([]);
-    };
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (searchPanelRef.current && !searchPanelRef.current.contains(event.target)) {
+                closeSearch();
+            }
+        };
 
+        if (showSearch) {
+            document.addEventListener('mousedown', handleClickOutside);
+        }
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, [showSearch, closeSearch]);
 
+    if (!showSearch) {
+        return null;
+    }
 
     return (
-        <div className="search-panel">
-            <form onSubmit={onSearchSubmit}>
-                <input
-                    type="text"
-                    placeholder="Search our store"
-                    value={localSearchQuery}
-                    onChange={onSearchChange}
-                    className="search-input"
-                    autoComplete="off" // Disable browser autocomplete
-                />
-                <button type="submit" className="btn search-submit">Search</button>
-            </form>
-            {suggestions.length > 0 && (
-                <ul className="suggestions-list">
-                    {suggestions.map((suggestion, index) => (
-                        <li key={index} onClick={() => onSuggestionClicked(suggestion)}>
-                            {suggestion}
-                        </li>
-                    ))}
-                </ul>
-            )}
+        <div className="search-backdrop">
+            <div className="search-panel" ref={searchPanelRef}>
+                <form onSubmit={handleSubmit}>
+                    <input style={{fontFamily: "montserrat", fontWeight: "500"}}
+                        type="text"
+                        placeholder="Search for product..."
+                        value={inputValue}
+                        onChange={handleInputChange}
+                        className="search-input"
+                        autoComplete="off"
+                    />
+                    {inputValue && (
+                        <IoClose className="search-close-icon" onClick={closeSearch} />
+                    )}
+                    <button type="submit" className="btn search-submit">Search</button>
+                </form>
+                {suggestions.length > 0 && (
+                    <ul className="suggestions-list" style={{fontFamily: "montserrat", fontWeight: "200"}}>
+                        {suggestions.map((suggestion) => (
+                            <li key={suggestion.id} onClick={() => handleSuggestionClick(suggestion.id)}>
+                                {suggestion.title}
+                            </li>
+                        ))}
+                    </ul>
+                )}
+            </div>
         </div>
     );
 }

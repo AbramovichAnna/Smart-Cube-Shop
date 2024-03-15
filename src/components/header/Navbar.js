@@ -1,58 +1,53 @@
-import { Link } from 'react-router-dom';
-import React, { useState } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 import { BsBasket } from 'react-icons/bs';
-import { TfiClose, TfiGift, TfiSearch, TfiUser, TfiHome } from 'react-icons/tfi';
+import { TfiSearch, TfiUser, TfiHome, TfiClose } from 'react-icons/tfi';
 import { BsShop } from "react-icons/bs";
 import AccountSection from './navbar_sections/AccountSection';
 import SearchSection from './navbar_sections/SearchSection';
-import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
 import './Navbar.css';
 
-
-// navbar sections
+// Navbar sections
 const NAVBAR_ITEMS = [
     { name: "home", icon: TfiHome },
     { name: "shop", icon: BsShop },
-    { name: "giftcards", icon: TfiGift },
-    { name: "search", icon: TfiSearch, closeIcon: TfiClose },
-    { name: "cart", icon: BsBasket, closeIcon: TfiClose },
+    { name: "search", icon: TfiSearch },
+    { name: "cart", icon: BsBasket },
     { name: "account", icon: TfiUser, closeIcon: TfiClose },
 ];
 
-function Navbar({ cartItems, products}) {
-
+function Navbar({ cartItems, products }) {
     const navigate = useNavigate();
+    const location = useLocation();
     const [activeSection, setActiveSection] = useState("");
-    const [searchQuery, setSearchQuery] = useState("");
+    const [isSearchActive, setIsSearchActive] = useState(false);
     const cartItemsCount = cartItems.reduce((total, item) => total + item.quantity, 0);
 
-    // HANDLE SEARCH SUBMIT
-    const handleSearchSubmit = () => {
-        navigate('/all-products', { state: { searchQuery } });
-    };
-
-    // TOGGLE NAVBAR SECTIONS
+    // Toggle navbar sections
     const handleToggle = (section) => {
-        if (section === "giftcards") {
-            navigate('/gift-cards');
+        if (section === "search") {
+            setIsSearchActive(prevState => !prevState);
+            setActiveSection(""); // Reset active section
             return;
-        } else if (section === "shop") {
+        } else {
+            setIsSearchActive(false); // Deactivate search for other sections
+        }
+
+        if (section === "shop") {
             navigate('/all-products');
             return;
-        }
-        else if (section === "home") {
+        } else if (section === "home") {
             navigate('/Smart-Cube-Shop');
             return;
-        }
-        else if (section === "cart") {
+        } else if (section === "cart") {
             navigate('/cart');
             return;
         }
-        setActiveSection((prevSection) => (prevSection === section ? "" : section));
+
+        setActiveSection(prevSection => (prevSection === section ? "" : section));
     };
 
-    // STICKY NAVBAR
+    // Sticky navbar
     useEffect(() => {
         const handleScroll = () => {
             const navbar = document.querySelector('.navbar');
@@ -63,12 +58,13 @@ function Navbar({ cartItems, products}) {
             }
         };
         window.addEventListener('scroll', handleScroll);
-        // Clean up the event listener
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
+        return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    // Reset search active state upon location change
+    useEffect(() => {
+        setIsSearchActive(false);
+    }, [location]);
 
     return (
         <div className="navbar">
@@ -83,39 +79,41 @@ function Navbar({ cartItems, products}) {
 
             <div className="navbar-right">
                 <div className="inner">
-                    {NAVBAR_ITEMS.map((item) => (
-                        <div
-                            key={item.name}
-                            role="button"
-                            tabIndex={0}
-                            onClick={() => handleToggle(item.name)}
-                            className={`navbar-right-toggle ${activeSection === item.name ? "active" : ""}`}
-                        >
-                            <div className="icon-container">
-                                {activeSection === item.name ? <item.closeIcon /> : <item.icon />}
-                                {item.name === "cart" && cartItemsCount > 0 && (
-                                    <span className="cart-item-count">
-                                        {cartItemsCount}
-                                    </span>
-                                )}
+                    {NAVBAR_ITEMS.map((item) => {
+                        // Determine if the current item's icon or closeIcon should be shown
+                        const Icon = activeSection === item.name && item.closeIcon ? item.closeIcon : item.icon;
+                        return (
+                            <div
+                                key={item.name}
+                                role="button"
+                                tabIndex={0}
+                                onClick={() => handleToggle(item.name)}
+                                className={`navbar-right-toggle ${activeSection === item.name ? "active" : ""}`}
+                            >
+                                <div className="icon-container">
+                                    <Icon />
+                                    {item.name === "cart" && cartItemsCount > 0 && (
+                                        <span className="cart-item-count">{cartItemsCount}</span>
+                                    )}
+                                </div>
+                                <h6 className="icon-text">{item.name}</h6>
                             </div>
-                            <h6 className="icon-text">{item.name}</h6>
-                        </div>
-                    ))}
+                        );
+                    })}
                 </div>
-                <div className={`navbar-right-dropdown ${activeSection ? "active" : ""}`}>
-                    {activeSection === "account" &&
-                        <AccountSection
-                            setActiveSection={setActiveSection}
-                        />}
-                    {activeSection === "search" &&
-                        <SearchSection
-                            setSearchQuery={setSearchQuery}
-                            handleSearchSubmit={handleSearchSubmit}
-                            products={products}
-                        />}
-                </div>
-
+                {isSearchActive ? (
+                    <SearchSection
+                        products={products}
+                        setIsSearchActive={setIsSearchActive}
+                    />
+                ) : (
+                    <div className={`navbar-right-dropdown ${activeSection ? "active" : ""}`}>
+                        {activeSection === "account" &&
+                            <AccountSection
+                                setActiveSection={setActiveSection}
+                            />}
+                    </div>
+                )}
             </div>
         </div>
     );

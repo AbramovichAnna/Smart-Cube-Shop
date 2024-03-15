@@ -44,7 +44,7 @@ function Footer() {
 
                         <div className="social-links">
                             <div className="foot_social_links social_links">
-                            <Link to="https://www.linkedin.com/in/anna-abramovich-545b56274/"><FaLinkedin className="footer-icon" /></Link>
+                                <Link to="https://www.linkedin.com/in/anna--abramovich/"><FaLinkedin className="footer-icon" /></Link>
                                 <Link to="https://github.com/AbramovichAnna?tab=repositories"><FaGithub className="footer-icon" /></Link>
                             </div>
                             <div className="foot_vr_line"></div>

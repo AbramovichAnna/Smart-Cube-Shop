@@ -1,5 +1,5 @@
 import React from 'react'
-import Services from '../components/Services'
+import Services from '../components/services/Services';
 import HeroSlider from '../components/slider/HeroSlider';
 import FeaturedSlider from '../components/slider/FeaturedSlider';
 import TopProducts from '../components/product/TopProducts';

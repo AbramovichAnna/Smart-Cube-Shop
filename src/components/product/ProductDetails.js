@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { IoMdCheckmark, IoMdClose } from 'react-icons/io';
 import "./ProductDetails.css";
-import Services from '../Services';
+import Services from '../services/Services';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import AddToCartButton from './AddToCartButton';
@@ -56,7 +56,7 @@ function ProductDetails({ onAddToCart }) {
                                     <li>
                                         {product.brand && <>
                                             <h5>Brand</h5>
-                                            <h5>{product.brand}</h5></>
+                                            <h5 style = {{color: "#009B48"}}><strong>{product.brand}</strong></h5></>
                                         }
                                     </li>
                                     <li>
@@ -75,7 +75,6 @@ function ProductDetails({ onAddToCart }) {
                             </div>
 
                             <div className="prod_details_ratings">
-                                {/* Ratings and other details can go here */}
                             </div>
 
                             <div className="separator"></div>
