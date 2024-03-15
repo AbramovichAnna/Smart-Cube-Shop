@@ -1,0 +1,124 @@
+.loader-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    /* Change flex direction to column to stack items vertically */
+    justify-content: center;
+    align-items: center;
+    background: #161A1E;
+}
+
+.loader-wrapper div {
+    position: relative;
+    transform-style: preserve-3d;
+}
+
+.loader-wrapper .axis-switcher {
+    animation: switch 6s steps(1) infinite;
+}
+
+@keyframes switch {
+    16.66667% {
+        transform: rotate(0.5turn);
+    }
+
+    33.33333% {
+        transform: rotate3d(1, 0, 0, 90deg);
+    }
+
+    50% {
+        transform: rotate3d(0, 0, 1, 90deg);
+    }
+
+    66.66667% {
+        transform: rotate3d(1, 0, 0, 90deg) rotate(0.5turn);
+    }
+
+    83.33333% {
+        transform: rotate3d(0, 0, 1, 90deg) rotate(0.5turn);
+    }
+}
+
+.cube {
+    transform: scale(0.25) rotateX(-35deg) rotateY(45deg);
+    color: #B90000;
+}
+
+.cube__comp:first-child * {
+    transform: rotateX(-90deg) translateZ(13.5em);
+}
+
+.cube__comp:first-child :before {
+    top: -3.9375em;
+    box-shadow: 0em 0em, 0em 9em, 9em 0em, 9em 9em, 18em 0em, 18em 9em;
+}
+
+.cube__comp:last-child {
+    animation: r 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+}
+
+.cube__face {
+    backface-visibility: hidden;
+    transform: rotateX(90deg) translateZ(13.5em);
+}
+
+.cube__face:before {
+    position: absolute;
+    left: -12.9375em;
+    width: 7.875em;
+    height: 7.875em;
+    border-radius: 4px;
+    top: -12.9375em;
+    box-shadow: 0em 0em, 9em 0em, 18em 0em;
+    background: #B90000;
+    content: '';
+}
+
+.cube__face:nth-child(1) {
+    transform: rotateY(0deg) translateZ(13.5em);
+}
+
+.cube__face:nth-child(2) {
+    transform: rotateY(90deg) translateZ(13.5em);
+}
+
+.cube__face:nth-child(3) {
+    transform: rotateY(180deg) translateZ(13.5em);
+}
+
+.cube__face:nth-child(4) {
+    transform: rotateY(270deg) translateZ(13.5em);
+}
+
+.cube__face:last-child:before {
+    top: -12.9375em;
+    box-shadow: 0em 0em, 0em 9em, 0em 18em, 9em 0em, 9em 9em, 9em 18em, 18em 0em, 18em 9em, 18em 18em;
+}
+
+@keyframes r {
+    to {
+        transform: rotateY(-90deg);
+    }
+}
+
+.loading__text {
+    color: #E6E5E4;
+    /* Ensure the text is visible against the dark background */
+    font-size: 1.5rem;
+    /* Adjust the font size as needed */
+    margin-top: 120px;
+    /* Add space between the cube and the text */
+    text-align: center;
+    /* Center the text horizontally */
+}
+
+.welcome-text {
+    color: #E6E5E4;
+    font-size: 2rem;
+    margin-bottom: 120px;
+    text-align: center;
+}
