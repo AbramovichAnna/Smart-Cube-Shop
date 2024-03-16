@@ -70,7 +70,7 @@ function Navbar({ cartItems, products }) {
         <div className="navbar">
             <Link to="/Smart-Cube-Shop" className="navbar-left">
                 <div className="navbar-logo">
-                    <img src="images/logo_2.png" alt="shop-logo" />
+                    <img src="Smart-Cube-Shop/images/logo_2.png" alt="shop-logo" />
                 </div>
                 <div className="logo-text">
                     <h3>Smart Cube</h3>
