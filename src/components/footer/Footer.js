@@ -23,9 +23,9 @@ function Footer() {
         <footer id="footer" className="footer">
             <div className="wrapper footer-wrapper">
                 <div className="container">
-                    <Link to="/" className="logo-center">
+                    <Link to="/Smart-Cube-Shop" className="logo-center">
                         <div className="navbar-logo">
-                            <img src="Smart-Cube-Shop/images/logo_2.png" alt="logo" />
+                            <img src="public/images/logo_2.png" alt="logo" />
                         </div>
                         <div className="logo-text">
                             <h3>Smart Cube</h3>
