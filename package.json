@@ -19,7 +19,7 @@
     "swiper": "^11.0.5",
     "web-vitals": "^2.1.4"
   },
-  "homepage": "https://abramovichanna.github.io/Smart-Cube-Shop/",
+  "homepage": "https://AbramovichAnna.github.io/Smart-Cube-Shop/",
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
