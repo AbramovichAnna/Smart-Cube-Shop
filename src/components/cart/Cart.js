@@ -100,7 +100,7 @@ function Cart({ cartItems, onIncrease, onDecrease, onRemove, onRemoveAll }) {
                                         </div>
                                     </div>
                                     <button type="button" className="btn checkout_btn" onClick={handleCheckout}>Checkout</button>
-                                    {/* <button type="button" className="btn remove_all_btn" onClick={onRemoveAll}>Remove All</button> */}
+                                    <button type="button" className="btn remove_all_btn" onClick={onRemoveAll}>Remove All</button>
                                 </div>
                             </div>
                         </div>
