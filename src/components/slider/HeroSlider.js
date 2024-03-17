@@ -25,7 +25,7 @@ export default function HeroSlider({ products }) {
                 spaceBetween={150}
                 centeredSlides={true}
                 loop={true}
-                speed={1000}
+                speed={1200}
                 autoplay={{
                     delay: 2500,
                     disableOnInteraction: false,
