@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/Smart-Cube-Shop/static/css/main.83c7757c.css",
+    "main.js": "/Smart-Cube-Shop/static/js/main.24ec14a2.js",
+    "static/js/453.603657e3.chunk.js": "/Smart-Cube-Shop/static/js/453.603657e3.chunk.js",
+    "index.html": "/Smart-Cube-Shop/index.html",
+    "main.83c7757c.css.map": "/Smart-Cube-Shop/static/css/main.83c7757c.css.map",
+    "main.24ec14a2.js.map": "/Smart-Cube-Shop/static/js/main.24ec14a2.js.map",
+    "453.603657e3.chunk.js.map": "/Smart-Cube-Shop/static/js/453.603657e3.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.83c7757c.css",
+    "static/js/main.24ec14a2.js"
+  ]
+}
