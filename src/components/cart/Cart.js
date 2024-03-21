@@ -9,6 +9,7 @@ function Cart({ cartItems, onIncrease, onDecrease, onRemove, onRemoveAll }) {
     useEffect(() => {
         // console.log("Current cartItems:", cartItems);
     }, [cartItems]);
+    
 
     // ORDER SUMMARY
     const calculateOrderSummary = () => {

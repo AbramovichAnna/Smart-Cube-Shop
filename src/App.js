@@ -115,6 +115,7 @@ function App() {
       }
     }
   };
+  // DECREASE CART
   const handleDecrease = async (item) => {
     if (item.quantity > 1) {
       try {
@@ -128,6 +129,7 @@ function App() {
       handleRemove(item);
     }
   };
+  // REMOVE FROM CART
   const handleRemove = async (item) => {
     try {
       await axios.delete(`${HOST_URL}/update_cart_items/${item.id}`);
@@ -137,6 +139,17 @@ function App() {
     }
   };
 
+  // CLEAR ALL ITEMS FROM CART
+  const handleRemoveAll = async () => {
+    try {
+      const response = await axios.delete(`${HOST_URL}/clear_cart`);
+      if (response.status === 204) {
+        setCartItems([]);         // Clear the cart items
+      }
+    } catch (error) {
+      console.error('Error clearing cart', error);
+    }
+  };
 
   // --------------------------------------------------- RENDER ----------------------------------------------
   return (
@@ -173,6 +186,7 @@ function App() {
             onIncrease={handleIncrease}
             onDecrease={handleDecrease}
             onRemove={handleRemove}
+            onRemoveAll={handleRemoveAll}
           />} />
 
         <Route path="/checkout" element={

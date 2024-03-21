@@ -192,3 +192,10 @@
     padding-top: 8rem;
     padding-bottom: 8rem;
 }
+
+.remove_all_btn {
+    background-color:rgba(102, 102, 102, 0.6); /* Red color for remove all */
+    color: white;
+    width: 100%; /* Ensures full width */
+    margin-top: 10px; /* Optional: adds some space between the buttons */
+}
